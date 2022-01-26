@@ -1,0 +1,71 @@
+<header class="headerMobile">
+    <nav class="navbar navbar-light fixed-top" style="background-color: white">
+    <div class="container-fluid">
+            <div class="col-md-2 col-xs-2">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><img src="{{ asset('images/ecocomputing_Logo.png') }}" class="img-fluid logoHeader"/></h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" aria-current="page" href="{{ path('home') }}">Accueil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="#">Ordinateurs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="#">Marques</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="#">Marques</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="#">Promos !</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="#">Dépannage</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-4 justify-content-center">
+                <a class="navbar-brand text-center" href="#" style="display: block; margin-right: auto; margin-left: auto">
+                    <img src="{{ asset('images/ecocomputing_Logo_phone.png') }}" class="img-fluid logoResponsive"/>
+                </a>
+            </div>
+            <div class="col-md-4 col-xs-4 text-end iconDivHeader">
+                {% if app.user %}
+                <a href="#" class="link-dark text-decoration-none">
+                    <i class="far fa-user"></i>
+                </a>
+                <a href="#" class="link-dark text-decoration-none">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                {% else %}
+                    <a href="#" class="link-dark text-decoration-none">
+                        <button type="button" class="d-inline btn btn-outline-secondary">Connexion</button>
+                    </a>
+                    <a href="#" class="link-dark text-decoration-none">
+                        <button type="button" class="d-inlie btn btn-outline-warning">Inscription</button>
+                    </a>
+                {% endif %}
+            </div>
+    </div>
+        <form class="w-100 me-2">
+            <div class="input-group">
+                <input type="text" class="form-control search-input" id="floatingInput" placeholder="Rechercher un produit">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+        </form>
+    </nav>
+</header>
