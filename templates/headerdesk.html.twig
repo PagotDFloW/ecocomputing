@@ -1,0 +1,49 @@
+<header class="header">
+    <div class="header-content">
+        <div class="row">
+            <div class="col-md-4 col-xs-4 logoDivHeader">
+                <a href="#" class="link-dark text-decoration-none">
+                    <img src="{{ asset('images/ecocomputing_Logo.png') }}" class="img-fluid logoHeader"/>
+                </a>
+            </div>
+            <div class="col-md-6 col-xs-4 searchbar">
+                <form class="w-100 me-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control search-input" id="floatingInput" placeholder="Rechercher un produit">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4 col-xs-4 text-end iconDivHeader">
+                {% if app.user %}
+                    <a href="#" class="link-dark text-decoration-none">
+                        <i class="far fa-user"></i>
+                    </a>
+                    <a href="#" class="link-dark text-decoration-none">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                {% else %}
+                    <a href="#" class="link-dark text-decoration-none">
+                        <button type="button" class="btn btn-outline-secondary">Secondary</button>
+                    </a>
+                    <a href="#" class="link-dark text-decoration-none">
+                        <button type="button" class="btn btn-outline-warning">Warning</button>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="main-menu" style="background-color: #4BA849;">
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item"><a href="#" class="nav-link text-dark">Ordinateurs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link text-dark">Marques</a></li>
+            <li class="nav-item"><a href="#" class="nav-link text-dark">Produits</a></li>
+            <li class="nav-item"><a href="#" class="nav-link text-dark">Promos !</a></li>
+            <li class="nav-item"><a href="#" class="nav-link text-dark">Dépannage </a></li>
+        </ul>
+    </div>
+</header>
