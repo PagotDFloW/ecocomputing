@@ -35,14 +35,51 @@ class Produits
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity=ProduitImages::class, mappedBy="produit", orphanRemoval=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $produitImages;
+    private $image1;
 
-    public function __construct()
-    {
-        $this->produitImages = new ArrayCollection();
-    }
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image2;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image3;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $dateUserAchat;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $produitCondition;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $prixEstime;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $statut;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateAchat;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateVente;
+
+   
 
     public function getId(): ?int
     {
@@ -85,33 +122,112 @@ class Produits
         return $this;
     }
 
-    /**
-     * @return Collection|ProduitImages[]
-     */
-    public function getProduitImages(): Collection
+    public function getImage1(): ?string
     {
-        return $this->produitImages;
+        return $this->image1;
     }
 
-    public function addProduitImage(ProduitImages $produitImage): self
+    public function setImage1(string $image1): self
     {
-        if (!$this->produitImages->contains($produitImage)) {
-            $this->produitImages[] = $produitImage;
-            $produitImage->setProduit($this);
-        }
+        $this->image1 = $image1;
 
         return $this;
     }
 
-    public function removeProduitImage(ProduitImages $produitImage): self
+    public function getImage2(): ?string
     {
-        if ($this->produitImages->removeElement($produitImage)) {
-            // set the owning side to null (unless already changed)
-            if ($produitImage->getProduit() === $this) {
-                $produitImage->setProduit(null);
-            }
-        }
+        return $this->image2;
+    }
+
+    public function setImage2(?string $image2): self
+    {
+        $this->image2 = $image2;
 
         return $this;
     }
+
+    public function getImage3(): ?string
+    {
+        return $this->image3;
+    }
+
+    public function setImage3(?string $image3): self
+    {
+        $this->image3 = $image3;
+
+        return $this;
+    }
+
+    public function getDateUserAchat(): ?string
+    {
+        return $this->dateUserAchat;
+    }
+
+    public function setDateUserAchat(string $dateUserAchat): self
+    {
+        $this->dateUserAchat = $dateUserAchat;
+
+        return $this;
+    }
+
+    public function getProduitCondition(): ?string
+    {
+        return $this->produitCondition;
+    }
+
+    public function setProduitCondition(string $produitCondition): self
+    {
+        $this->produitCondition = $produitCondition;
+
+        return $this;
+    }
+
+    public function getPrixEstime(): ?float
+    {
+        return $this->prixEstime;
+    }
+
+    public function setPrixEstime(float $prixEstime): self
+    {
+        $this->prixEstime = $prixEstime;
+
+        return $this;
+    }
+
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(string $statut): self
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getDateAchat(): ?\DateTimeInterface
+    {
+        return $this->dateAchat;
+    }
+
+    public function setDateAchat(?\DateTimeInterface $dateAchat): self
+    {
+        $this->dateAchat = $dateAchat;
+
+        return $this;
+    }
+
+    public function getDateVente(): ?\DateTimeInterface
+    {
+        return $this->dateVente;
+    }
+
+    public function setDateVente(?\DateTimeInterface $dateVente): self
+    {
+        $this->dateVente = $dateVente;
+
+        return $this;
+    }
+
 }

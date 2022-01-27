@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+
+
+<div class="container">
+    <div class="col-5 m-auto">
+        {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.prix) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.image1) }}
+            {{ form_row(form.image2) }}
+            {{ form_row(form.image3) }}
+            <button type="submit" class="btn btn-success">Enregistrer</button>
+        {{ form_end(form) }}
+    </div>
+</div>
+
+
+{% endblock %}
