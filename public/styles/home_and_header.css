@@ -1,6 +1,9 @@
 body{
     font-family: 'Roboto Mono';
 }
+.content{
+    margin-bottom: 5%;
+}
 .logoHeader{
     width: 193px;
     height: 113px;
@@ -44,7 +47,7 @@ body{
     transition:  color 2s;
 
 }
-.main-menu li :hover{
+.main-menu li:hover{
     background-color: white;
     color : #0c7f08;
     border-radius: inherit;
@@ -56,6 +59,7 @@ body{
 .headerMobile{
     margin-bottom: 10%;
 }
+
 
 /* ----------------------MEDIA QUERIES -------------------------------*/
 @media screen and (max-width: 890px) {
