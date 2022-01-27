@@ -1,0 +1,55 @@
+{% extends 'back/baseBack.html.twig' %}
+
+{% block title %}Hello ProduitsController!{% endblock %}
+
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        {% include "back/includes/sidebar.html.twig" only %}
+
+        <div class="col py-3">
+           <div class="container">
+                <div class="row row-cols-1 row-cols-md-5 g-4 justify-content-center">
+                    {% for produit in produits %}     
+                        <div class="col">
+                            <div class="card h-100">
+                                <img src="..." class="card-img-top" alt="...">
+
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ produit.name }}</h5>
+                                    <p class="card-text">{{ produit.description }}</p>
+                                </div>
+
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item ft-12" style="padding: 0.2rem 0.5rem; font-weight:bold;">Prix : {{ produit.prix }}€</li>
+                                    <li class="list-group-item ft-12" style="padding: 0.2rem 0.5rem;">
+                                        Provenance : 
+                                        {% if produit.statut == "original" %}
+                                            original
+                                        {% elseif produit.statut == "acheté" %}
+                                            acheté
+                                        {% endif %}
+                                    </li>
+                                    <li class="list-group-item ft-12" style="padding: 0.2rem 0.5rem;">Date d'achat : {% if produit.dateAchat is not null %}{{ produit.dateAchat|date("d/m/Y") }}{% endif %}</li>
+                                    <li class="list-group-item ft-12" style="padding: 0.2rem 0.5rem;">Mis en ligne : {% if produit.createdAt is not null %}{{ produit.createdAt|format_datetime() }}{% endif %}</li>
+                                </ul>
+
+                                <div class="card-footer">
+                                    <div class="d-flex">
+                                        <a href="{{ path('admin_edit_produit', {'id': produit.id}) }}" class="card-link btn btn-primary btn-sm">Modifier</a>
+                                        <a href="{{ path('admin_delete_produit', {'id': produit.id}) }}" class="card-link btn btn-primary btn-sm">Supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

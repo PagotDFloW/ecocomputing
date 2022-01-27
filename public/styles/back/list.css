@@ -1,0 +1,20 @@
+.card-text {
+    font-size:14px;
+}
+
+.ft-12 {
+    font-size:13px;
+}
+
+
+.sidebarbackmenu  {
+    background-color: #0c7f08;
+}
+
+.nav-link {
+    color: white;
+}
+
+.nav-link:focus {
+    color:black;
+}
