@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Email envoyé{% endblock %}
+
+{% block body %}
+    <style>
+        .container{
+            margin-top: 5%;
+            margin-bottom: 15%;
+        }
+        .tryAgain{
+            text-decoration: none;
+        }
+        .tryAgain:hover{
+            color: #0c7f08;
+        }
+    </style>
+    <div class="container text-center">
+        <h1 class="fw-bold" style="margin-bottom: 3%">Email envoyé !</h1>
+        <p>
+            <strong>Merci de faire confiance à ECO COMPUTING.</strong> <br><br>
+            Un lien pour rénitialiser votre mot de passe vous a été envoyé. <br>
+            Le lien expire dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+        </p>
+        <p>Si vous n'avez pas reçu l'email, vérifier vos spam ou <a href="{{ path('app_forgot_password_request') }}" class="tryAgain">essayer à nouveau</a>.</p>
+    </div>
+
+{% endblock %}
