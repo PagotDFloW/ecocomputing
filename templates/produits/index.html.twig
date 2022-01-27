@@ -1,72 +1,55 @@
-{% extends 'base.html.twig' %}
+{% extends 'back/baseBack.html.twig' %}
 
 {% block title %}Hello ProduitsController!{% endblock %}
 
+
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        {% include "back/includes/sidebar.html.twig" only %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/gabri/OneDrive/Bureau/IPSSI/EXAMENS/Projet Final/ecocomputing/src/Controller/ProduitsController.php'|file_link(0) }}">src/Controller/ProduitsController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/gabri/OneDrive/Bureau/IPSSI/EXAMENS/Projet Final/ecocomputing/templates/produits/index.html.twig'|file_link(0) }}">templates/produits/index.html.twig</a></code></li>
-    </ul>
+        <div class="col py-3">
+           <div class="container">
+                <div class="row row-cols-1 row-cols-md-5 g-4 justify-content-center">
+                    {% for produit in produits %}     
+                        <div class="col">
+                            <div class="card h-100">
+                                <img src="..." class="card-img-top" alt="...">
 
-    <a href="{{ path('admin_new_produit') }}">nouveau produit</a>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ produit.name }}</h5>
+                                    <p class="card-text">{{ produit.description }}</p>
+                                </div>
 
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item ft-12" style="padding: 0.2rem 0.5rem; font-weight:bold;">Prix : {{ produit.prix }}€</li>
+                                    <li class="list-group-item ft-12" style="padding: 0.2rem 0.5rem;">
+                                        Provenance : 
+                                        {% if produit.statut == "original" %}
+                                            original
+                                        {% elseif produit.statut == "acheté" %}
+                                            acheté
+                                        {% endif %}
+                                    </li>
+                                    <li class="list-group-item ft-12" style="padding: 0.2rem 0.5rem;">Date d'achat : {% if produit.dateAchat is not null %}{{ produit.dateAchat|date("d/m/Y") }}{% endif %}</li>
+                                    <li class="list-group-item ft-12" style="padding: 0.2rem 0.5rem;">Mis en ligne : {% if produit.createdAt is not null %}{{ produit.createdAt|format_datetime() }}{% endif %}</li>
+                                </ul>
 
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <div class="card h-100">
-                    <img src="..." class="card-img-top" alt="...">
+                                <div class="card-footer">
+                                    <div class="d-flex">
+                                        <a href="{{ path('admin_edit_produit', {'id': produit.id}) }}" class="card-link btn btn-primary btn-sm">Modifier</a>
+                                        <a href="#" class="card-link btn btn-primary btn-sm">Supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
 
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card h-100">
-                    <img src="..." class="card-img-top" alt="...">
-
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card h-100">
-                    <img src="..." class="card-img-top" alt="...">
-                    
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                    </div>
-                    
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock %}

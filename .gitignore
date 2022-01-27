@@ -20,3 +20,5 @@
 ###< phpunit/phpunit ###
 .env
 composer.lock
+config/bundles.php
+composer.lock

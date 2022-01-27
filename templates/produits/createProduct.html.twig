@@ -1,22 +1,81 @@
-{% extends "base.html.twig" %}
+{% extends 'back/baseBack.html.twig' %}
 
 
 {% block body %}
 
 
-<div class="container">
-    <div class="col-5 m-auto">
-        {{ form_start(form) }}
-            {{ form_row(form.name) }}
-            {{ form_row(form.prix) }}
-            {{ form_row(form.description) }}
-            {{ form_row(form.image1) }}
-            {{ form_row(form.image2) }}
-            {{ form_row(form.image3) }}
-            <button type="submit" class="btn btn-success">Enregistrer</button>
-        {{ form_end(form) }}
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        {% include "back/includes/sidebar.html.twig" only %}
+
+        <div class="col py-3">
+            <div class="container">
+                <div class="col-12 m-auto">
+                    {{ form_start(form) }}
+                        <div class="d-flex justify-content-around align-items-start">
+                            <div class="col-5">
+                                {{ form_row(form.name) }}
+                                <div class="d-flex justify-content-between">
+                                    {{ form_row(form.prix) }}
+                                    {% if produit is defined %}
+                                        {{ form_row(form.prixEstime) }}
+                                    {% endif %}
+                                </div>
+                                {{ form_row(form.description) }}
+
+                                {% if produit is defined %}
+                                    {{ form_row(form.produitCondition) }}
+                                    {{ form_row(form.statut) }}
+                                {% endif %}
+                                
+                            </div>
+
+                            <div class="d-flex flex-column mt-4">
+                                <div class="d-flex mb-3">
+                                    {% if produit is defined %}
+                                        <div class="me-2" style="width:100px; height: 100px; border:0.1px solid #ccc;">
+                                            {% if produit.image1 is not null %}
+                                                <img src="{{ asset('uploads/produits/' ~ produit.image1) }}" alt="">
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                    {{ form_row(form.image1) }}
+                                </div>
+                                <div class="d-flex mb-3">
+                                    {% if produit is defined %}
+                                        <div class="me-2" style="width:100px; height: 100px; border:0.1px solid #ccc;">
+                                            {% if produit.image2 is not null %}
+                                                <img src="{{ asset('uploads/produits/' ~ produit.image2) }}" alt="">
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                    {{ form_row(form.image2) }}
+                                </div>
+                                <div class="d-flex mb-3">
+                                    {% if produit is defined %}
+                                        <div class="me-2" style="width:100px; height: 100px; border:0.1px solid #ccc;">
+                                            {% if produit.image3 is not null %}
+                                                <img src="{{ asset('uploads/produits/' ~ produit.image3) }}" alt="">
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                    {{ form_row(form.image3) }}
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="m-auto text-center mt-5">
+                            <button type="submit" class="btn btn-success text-center">Enregistrer</button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
+
 
 
 {% endblock %}
