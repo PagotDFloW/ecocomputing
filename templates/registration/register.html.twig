@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ECO COMPUTING | INSCRIPTION{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('styles/register.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ flashError }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% for type, messages in app.flashes %}
+    <div class="alert alert-{{type}} alert-dismissible fade show" role="alert">
+        {% for message in messages %}
+            <strong>{{message}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-9 mx-auto">
+                <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+                    <div class="card-img-left d-none d-md-flex">
+                        <!-- Background image for card set in CSS! -->
+                    </div>
+
+                    <div class="card-body p-4 p-sm-5">
+                        <h5 class="card-title text-center mb-5 fw-light fs-5">Inscrivez vous</h5>
+                        {{ form_start(registrationForm) }}
+
+                            <div class="form-floating mb-3">
+                                {{ form_widget(registrationForm.nom, {attr: {class: "form-control",id:'floatingInputUsername', placeholder: "Nom"}})}}
+                                <label for="floatingInputUsername"  class="form-label">Nom</label>
+                            </div>
+                            <div class="invalid-feedback">
+                            {{ form_errors(registrationForm.nom) }}
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                {{ form_widget(registrationForm.prenom, {attr: {class: "form-control",id:'floatingInputFname', placeholder: "Nom"}})}}
+                                <label for="floatingInputFname"  class="form-label">Prénom</label>
+                            </div>
+                            <div class="invalid-feedback">
+                            {{ form_errors(registrationForm.prenom) }}
+                            </div>
+                            <hr>
+
+                            <div class="form-floating mb-3">
+                                {{ form_widget(registrationForm.email, {attr: {class: "form-control", id:'floatingInputEmail', placeholder: "nom@exemple.com"}})}}
+                                <label for="floatingInputEmail"  class="form-label">Adresse email</label>
+                            </div>
+                            <div class="invalid-feedback">
+                            {{ form_errors(registrationForm.email) }}
+                            </div>
+                            <div class="form-floating mb-3">
+                                {{ form_widget(registrationForm.phone, {attr: {class: "form-control", id:'floatingInputPhone', placeholder: "nom@exemple.com"}})}}
+                                <label for="floatingInputPhone"  class="form-label">Numéro de téléphone</label>
+                            </div>
+                            <div class="invalid-feedback">
+                            {{ form_errors(registrationForm.phone) }}
+                            </div>
+
+                            <hr>
+
+                            <div class="form-floating mb-3">
+                                {{ form_widget(registrationForm.plainPassword.first, {attr: {class: "form-control", id:'floatingPassword', placeholder: "Nom"}})}}
+                                <label for="floatingPassword"  class="form-label">Mot de passe</label>
+                            </div>
+                            <div class="invalid-feedback">
+                            {{ form_errors(registrationForm.plainPassword.first) }}
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                {{ form_widget(registrationForm.plainPassword.second, {attr: {class: "form-control", id:'floatingPasswordConfirm', placeholder: "Nom"}})}}
+                                <label for="floatingPasswordConfirm"  class="form-label">Confirmer le mot de passe</label>
+                            </div>
+                            <div class="invalid-feedback">
+                                {{ form_errors(registrationForm.plainPassword.second) }}
+                            </div>
+
+
+                            <div class="d-grid mb-2">
+                                <button class="btn btn-lg btn-success btn-login fw-bold text-uppercase" type="submit">Register</button>
+                            </div>
+
+                            <a class="d-block text-center mt-2 small" href="{{ path('app_login') }}">Déjà un compte ? Connectez vous ici</a>
+
+                            <hr class="my-4">
+
+                        {{ form_start(registrationForm) }}
+                    </div>
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+{% endblock %}
