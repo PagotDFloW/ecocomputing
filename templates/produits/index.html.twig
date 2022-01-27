@@ -39,7 +39,7 @@
                                 <div class="card-footer">
                                     <div class="d-flex">
                                         <a href="{{ path('admin_edit_produit', {'id': produit.id}) }}" class="card-link btn btn-primary btn-sm">Modifier</a>
-                                        <a href="#" class="card-link btn btn-primary btn-sm">Supprimer</a>
+                                        <a href="{{ path('admin_delete_produit', {'id': produit.id}) }}" class="card-link btn btn-primary btn-sm">Supprimer</a>
                                     </div>
                                 </div>
                             </div>

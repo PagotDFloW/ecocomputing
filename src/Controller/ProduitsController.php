@@ -137,4 +137,26 @@ class ProduitsController extends AbstractController
             'produit' => $produit
         ]);
     }
+
+
+
+    /**
+     * @Route("/produit/{id}/delete", name="delete_produit")
+     */
+    public function deleteProduit(Produits $produit, EntityManagerInterface $manager, Request $request) {
+        $image1 = $produit->getImage1();
+        $image2 = $produit->getImage2();
+        $image3 = $produit->getImage3();
+
+        unlink(__DIR__.'/../../public/uploads/produits/'.$image1);
+        unlink(__DIR__.'/../../public/uploads/produits/'.$image2);
+        unlink(__DIR__.'/../../public/uploads/produits/'.$image3);
+
+        $query = $manager->createQuery('DELETE FROM App\Entity\Produits p WHERE p.id = :id');
+        $query->setParameter('id', $produit->getId());
+
+        $query = $query->getResult();
+
+        return $this->redirectToRoute('admin_produits');
+    }
 }
