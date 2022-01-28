@@ -1,0 +1,31 @@
+.titleindexavis {
+    display: center; 
+    color: rgba(var(--bs-dark-rgb),var(--bs-bg-opacity)); 
+}
+.singleavis { 
+    border:1px solid rgba(var(--bs-dark-rgb),var(--bs-bg-opacity));
+    margin:3px;
+}
+.avisid { 
+    font-weight : bold; 
+    color: #4BA849; 
+}
+
+.fa-eye{
+    color: #4BA849; 
+}
+.w100
+{
+    width: 100%; 
+}
+.center 
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 10%; 
+}
+
+.btnsubmitsaveavis{
+    background-color : #4BA849;
+    color : rgba(var(--bs-dark-rgb),var(--bs-bg-opacity)); 
+}

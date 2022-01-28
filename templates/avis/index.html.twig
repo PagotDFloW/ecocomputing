@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AvisController!{% endblock %}
+
+{% block body %}
+<style>
+    
+</style>
+<div class="container avis">
+    <h1 class="titleindexavis">Vos Avis</h1>
+    {% if (avis|length > 0) %}
+        {% for singleavis in avis %}
+            <div class="singleavis">
+            <p class="avisid">
+            <a href="{{ path('singleAvis', {id: singleavis.id} )}}"><i class="fas fa-eye"></i></a>
+            
+            Avis n° {{ singleavis.id }} :</p>
+            <p>{{ singleavis.avis }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Il n'y a pas de categories pour le moment</p>
+    {% endif %}
+</div>
+<<<<<<< HEAD
+{% endblock %}
+=======
+{% endblock %}
+>>>>>>> 3d1f0d6d81fed7c10c67e2be531bc9aa8b41eb49
