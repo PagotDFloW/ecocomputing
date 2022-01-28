@@ -12,8 +12,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Persistence\ManagerRegistry;
 
-
-
 class AvisController extends AbstractController
 {
     /**
@@ -23,7 +21,7 @@ class AvisController extends AbstractController
     {
         $avis = $this->getDoctrine()->getRepository(Avis::class)->findAll(); 
         return $this->render('avis/index.html.twig', [
-            'avis' => $avis,
+            'avis' => $avis, 
         ]);
     }
 

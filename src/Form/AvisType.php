@@ -17,9 +17,12 @@ class AvisType extends AbstractType
             // ->add('date')
             ->add('avis', TextareaType::class, [
                 "label" => "Avis : ", 
-                "attr" => ["class" => "form-group"]
+                "attr" => ["class" => "form-group w100", 
+                "rows" => "7"]
             ])
-            ->add('Envoyer', SubmitType::class); 
+            ->add('Envoyer', SubmitType::class, [
+                "attr" => ["class" => "center btnsubmitsaveavis"] 
+            ]); 
         ;
     }
 
