@@ -148,9 +148,15 @@ class ProduitsController extends AbstractController
         $image2 = $produit->getImage2();
         $image3 = $produit->getImage3();
 
-        unlink(__DIR__.'/../../public/uploads/produits/'.$image1);
-        unlink(__DIR__.'/../../public/uploads/produits/'.$image2);
-        unlink(__DIR__.'/../../public/uploads/produits/'.$image3);
+        if (file_exists(__DIR__.'/../../public/uploads/produits/'. $image1)) {
+            unlink(__DIR__.'/../../public/uploads/produits/'.$image1);
+        }
+        if (file_exists(__DIR__.'/../../public/uploads/produits/'. $image2)) {
+            unlink(__DIR__.'/../../public/uploads/produits/'.$image2);
+        }
+        if (file_exists(__DIR__.'/../../public/uploads/produits/'. $image3)) {
+            unlink(__DIR__.'/../../public/uploads/produits/'.$image3);
+        }
 
         $query = $manager->createQuery('DELETE FROM App\Entity\Produits p WHERE p.id = :id');
         $query->setParameter('id', $produit->getId());
