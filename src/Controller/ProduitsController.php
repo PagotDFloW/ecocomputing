@@ -80,7 +80,7 @@ class ProduitsController extends AbstractController
             return $this->redirectToRoute('admin_produits');
         }
 
-        return $this->render('produits/createProduct.html.twig', [
+        return $this->render('produits/editionProduct.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -102,7 +102,9 @@ class ProduitsController extends AbstractController
                 $filename = md5(uniqid()) . '.' . $file->guessExtension();
                 $file->move($this->getParameter('produits_images_directory'), $filename);
 
-                unlink(__DIR__.'/../../public/uploads/produits/'. $image1);
+                if ($image1 !== null) {
+                    unlink(__DIR__.'/../../public/uploads/produits/'. $image1);
+                }
 
                 $produit->setImage1($filename);
             }
@@ -111,7 +113,9 @@ class ProduitsController extends AbstractController
                 $filename = md5(uniqid()) . '.' . $file->guessExtension();
                 $file->move($this->getParameter('produits_images_directory'), $filename);
 
-                unlink(__DIR__.'/../../public/uploads/produits/'. $image2);
+                if ($image2 !== null) {
+                    unlink(__DIR__.'/../../public/uploads/produits/'. $image2);
+                }
 
                 $produit->setImage2($filename);
             }
@@ -120,7 +124,9 @@ class ProduitsController extends AbstractController
                 $filename = md5(uniqid()) . '.' . $file->guessExtension();
                 $file->move($this->getParameter('produits_images_directory'), $filename);
 
-                unlink(__DIR__.'/../../public/uploads/produits/'. $image3);
+                if ($image3 !== null) {
+                    unlink(__DIR__.'/../../public/uploads/produits/'. $image3);
+                }
 
                 $produit->setImage3($filename);
             }
@@ -132,9 +138,10 @@ class ProduitsController extends AbstractController
             return $this->redirectToRoute('admin_produits');
         }
 
-        return $this->render('produits/createProduct.html.twig', [
+        return $this->render('produits/editionProduct.html.twig', [
             'form' => $form->createView(),
-            'produit' => $produit
+            'produit' => $produit,
+            'edition' => true
         ]);
     }
 
@@ -148,14 +155,20 @@ class ProduitsController extends AbstractController
         $image2 = $produit->getImage2();
         $image3 = $produit->getImage3();
 
-        if (file_exists(__DIR__.'/../../public/uploads/produits/'. $image1)) {
-            unlink(__DIR__.'/../../public/uploads/produits/'.$image1);
+        if ($image1 !== null) {
+            if (file_exists(__DIR__.'/../../public/uploads/produits/'. $image1)) {
+                unlink(__DIR__.'/../../public/uploads/produits/'.$image1);
+            }
         }
-        if (file_exists(__DIR__.'/../../public/uploads/produits/'. $image2)) {
-            unlink(__DIR__.'/../../public/uploads/produits/'.$image2);
+        if ($image1 !== null) {
+            if (file_exists(__DIR__.'/../../public/uploads/produits/'. $image2)) {
+                unlink(__DIR__.'/../../public/uploads/produits/'.$image2);
+            }
         }
-        if (file_exists(__DIR__.'/../../public/uploads/produits/'. $image3)) {
-            unlink(__DIR__.'/../../public/uploads/produits/'.$image3);
+        if ($image1 !== null) {
+            if (file_exists(__DIR__.'/../../public/uploads/produits/'. $image3)) {
+                unlink(__DIR__.'/../../public/uploads/produits/'.$image3);
+            }
         }
 
         $query = $manager->createQuery('DELETE FROM App\Entity\Produits p WHERE p.id = :id');
@@ -164,5 +177,37 @@ class ProduitsController extends AbstractController
         $query = $query->getResult();
 
         return $this->redirectToRoute('admin_produits');
+    }
+
+
+
+    /**
+     * @Route("/produit/{id}/{photoname}/delete-photo", name="delete_product_photo")
+     */
+    public function deleteProductPhoto(Produits $produit, string $photoname, EntityManagerInterface $manager, Request $request) {
+
+        if ($photoname === $produit->getImage1()) {
+            if (file_exists(__DIR__.'/../../public/uploads/produits/'. $photoname)) {
+                unlink(__DIR__.'/../../public/uploads/produits/'. $photoname);
+            }
+            $produit->setImage1(null);
+        }
+        elseif ($photoname === $produit->getImage2()) {
+            if (file_exists(__DIR__.'/../../public/uploads/produits/'. $photoname)) {
+                unlink(__DIR__.'/../../public/uploads/produits/'. $photoname);
+            }
+            $produit->setImage2(null);
+        }
+        elseif ($photoname === $produit->getImage3()) {
+            if (file_exists(__DIR__.'/../../public/uploads/produits/'. $photoname)) {
+                unlink(__DIR__.'/../../public/uploads/produits/'. $photoname);
+            }
+            $produit->setImage3(null);
+        }
+
+        $manager->persist($produit);
+        $manager->flush();
+
+        return $this->redirectToRoute('admin_edit_produit', ['id' => $produit->getId()]);
     }
 }

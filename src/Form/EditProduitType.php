@@ -10,6 +10,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Categories;
 
 class EditProduitType extends AbstractType
 {
@@ -22,7 +24,7 @@ class EditProduitType extends AbstractType
             ->add('image1', FileType::class, [
                 'mapped' => false,
                 'required' => true,
-                'label' => "Image Principale",
+                'label' => "Image 1",
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
@@ -34,8 +36,8 @@ class EditProduitType extends AbstractType
             ])
             ->add('image2', FileType::class, [
                 'mapped' => false,
-                'required' => true,
-                'label' => "Image Principale",
+                'required' => false,
+                'label' => "Image 2",
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
@@ -47,8 +49,8 @@ class EditProduitType extends AbstractType
             ])
             ->add('image3', FileType::class, [
                 'mapped' => false,
-                'required' => true,
-                'label' => "Image Principale",
+                'required' => false,
+                'label' => "Image 3",
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
@@ -79,6 +81,12 @@ class EditProduitType extends AbstractType
                 ],
                 'placeholder' => '-',
                 'required' => false
+            ])
+            ->add('categorie', EntityType::class, [
+                'class' => Categories::class,
+                'choice_label' => 'name',
+                'label' => 'Catégorie',
+                'required' =>false
             ])
         ;
     }

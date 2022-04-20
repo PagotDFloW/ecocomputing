@@ -1,0 +1,59 @@
+{% extends 'back/baseBack.html.twig' %}
+
+
+{% block body %}
+
+{% include "headeronly.html.twig" only %}
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        {% include "back/includes/sidebar.html.twig" only %}
+
+        <div class="col py-3">
+            <div class="container">
+                <div class="col-12 m-auto">
+
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success alert-dismissible fase show" role="alert">
+                            <strong>{{ message }}</strong>
+                        </div>
+                    {% endfor %}
+
+                    <h1>Liste des catégories</h1>
+
+                    <br>
+
+                    <div class="col-8 m-auto">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="active text-center">
+                                    <th>#</th>
+                                    <th>Nom</th>
+                                    <th>Sous catégories</th>
+                                    <th>Produits</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+    
+                            <tbody>
+                                {% set nbr = 0 %}
+                                {% for category in categories %}
+                                    <tr style="text-align:center;">
+                                        <td>{% set nbr = nbr + 1 %}{{ nbr }}</td>
+                                        <td><a href="{{ path('admin_edit_category', {'id': category.id}) }}" class="text-dark">{{ category.name }}</a></td>
+                                        <td>{{ category.subCategories|length }}</td>
+                                        <td>{{ category.produits|length }}</td>
+                                        <td><a href="{{ path('admin_delete_category', {'id': category.id}) }}" class="text-danger" onclick="return confirm('Souhaitez-vous supprimer cette catégorie ?');">supprimer</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

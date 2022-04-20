@@ -35,7 +35,7 @@ class Produits
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image1;
 
@@ -83,6 +83,11 @@ class Produits
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="produits")
+     */
+    private $categorie;
 
    
 
@@ -132,7 +137,7 @@ class Produits
         return $this->image1;
     }
 
-    public function setImage1(string $image1): self
+    public function setImage1(?string $image1): self
     {
         $this->image1 = $image1;
 
@@ -243,6 +248,18 @@ class Produits
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categories
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categories $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

@@ -1,8 +1,8 @@
 <div class="sidebarbackmenu col-auto col-md-3 col-xl-2 px-sm-2 px-0">
     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-        <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <!-- <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <span class="fs-5 d-none d-sm-inline">Menu</span>
-        </a>
+        </a> -->
     
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
             <li class="nav-item">
@@ -18,11 +18,10 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><a class="dropdown-item" href="{{ path('admin_produits') }}">Liste</a></li>
+                        <li><a class="dropdown-item" href="{{ path('admin_produits') }}">Liste des produits</a></li>
                         <li><a class="dropdown-item" href="{{ path('admin_new_produit') }}">Nouveau produit</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        <!-- <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li> -->
                     </ul>
                 </div>
             </li>
@@ -34,18 +33,16 @@
             </li>
 
             <li>
-                <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                    <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span>
-                </a>
+                <div class="dropdown nav-link px-0 align-middle">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="d-none d-sm-inline mx-1">Catégories</span>
+                    </a>
 
-                <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                    <li class="w-100">
-                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
-                    </li>
-                </ul>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                        <li><a class="dropdown-item" href="{{ path('admin_categories') }}">Liste des catégories</a></li>
+                        <li><a class="dropdown-item" href="{{ path('admin_new_category') }}">Nouvelle catégorie</a></li>
+                    </ul>
+                </div>
             </li>
 
             <li>
@@ -82,7 +79,10 @@
        
         <div class="dropdown pb-4">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                <div style="width:50px;">
+                    <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                </div>
+
                 <span class="d-none d-sm-inline mx-1">loser</span>
             </a>
 
