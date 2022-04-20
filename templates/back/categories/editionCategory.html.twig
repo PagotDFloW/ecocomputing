@@ -1,0 +1,38 @@
+{% extends 'back/baseBack.html.twig' %}
+
+
+{% block body %}
+
+{% include "headeronly.html.twig" only %}
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        {% include "back/includes/sidebar.html.twig" only %}
+
+        <div class="col py-3">
+            <div class="container">
+                <div class="col-12 m-auto">
+                    <h1>Edition de catégorie</h1>
+
+                    <br>
+
+                    {{ form_start(form) }}
+                        <div class="d-flex justify-content-around align-items-start">
+                            <div class="col-5">
+                                {{ form_row(form.name) }}
+                                {{ form_row(form.categoryParent) }}
+                            </div>
+                        </div>
+
+                        <div class="m-auto text-center mt-5">
+                            <button type="submit" class="btn btn-success text-center">Enregistrer</button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

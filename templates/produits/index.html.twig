@@ -5,17 +5,24 @@
 
 {% block body %}
 
+{% include "headeronly.html.twig" only %}
+
 <div class="container-fluid">
+
     <div class="row flex-nowrap">
         {% include "back/includes/sidebar.html.twig" only %}
 
         <div class="col py-3">
-           <div class="container">
+           <div class="container pb-5">
                 <div class="row row-cols-1 row-cols-md-5 g-4 justify-content-center">
                     {% for produit in produits %}     
                         <div class="col">
                             <div class="card h-100">
-                                <img src="..." class="card-img-top" alt="...">
+                                <div style="height:150px;">
+                                    {% if produit.image1 is not null %}
+                                        <a href="{{ path('admin_edit_produit', {'id': produit.id}) }}"><img src="{{ asset('uploads/produits/' ~ produit.image1) }}" class="card-img-top" alt="..."></a>
+                                    {% endif %}
+                                </div>
 
                                 <div class="card-body">
                                     <h5 class="card-title">{{ produit.name }}</h5>
@@ -37,9 +44,9 @@
                                 </ul>
 
                                 <div class="card-footer">
-                                    <div class="d-flex">
-                                        <a href="{{ path('admin_edit_produit', {'id': produit.id}) }}" class="card-link btn btn-primary btn-sm">Modifier</a>
-                                        <a href="{{ path('admin_delete_produit', {'id': produit.id}) }}" class="card-link btn btn-primary btn-sm">Supprimer</a>
+                                    <div class="d-flex justify-content-between">
+                                        <a href="{{ path('admin_edit_produit', {'id': produit.id}) }}" class="card-link btn btn-primary btn-sm" style="font-size:12px; padding:0 5px;">Modifier</a>
+                                        <a href="{{ path('admin_delete_produit', {'id': produit.id}) }}" class="card-link btn btn-danger btn-sm" style="font-size:12px; padding:0 5px;">Supprimer</a>
                                     </div>
                                 </div>
                             </div>

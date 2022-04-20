@@ -1,8 +1,8 @@
 {% extends 'back/baseBack.html.twig' %}
 
-
 {% block body %}
 
+{% include "headeronly.html.twig" only %}
 
 <div class="container-fluid">
     <div class="row flex-nowrap">
@@ -11,6 +11,10 @@
         <div class="col py-3">
             <div class="container">
                 <div class="col-12 m-auto">
+                    <h1>Edition de produit</h1>
+
+                    <br>
+
                     {{ form_start(form) }}
                         <div class="d-flex justify-content-around align-items-start">
                             <div class="col-5">
@@ -24,6 +28,7 @@
                                 {{ form_row(form.description) }}
 
                                 {% if produit is defined %}
+                                    {{ form_row(form.categorie) }}
                                     {{ form_row(form.produitCondition) }}
                                     {{ form_row(form.statut) }}
                                 {% endif %}
@@ -33,19 +38,25 @@
                             <div class="d-flex flex-column mt-4">
                                 <div class="d-flex mb-3">
                                     {% if produit is defined %}
-                                        <div class="me-2" style="width:100px; height: 100px; border:0.1px solid #ccc;">
+                                        <div class="me-2" style="position:relative; width:100px; height: 100px; border:0.1px solid #ccc;">
                                             {% if produit.image1 is not null %}
                                                 <img src="{{ asset('uploads/produits/' ~ produit.image1) }}" alt="">
+                                                <a href="{{ path('admin_delete_product_photo', {'id': produit.id, 'photoname': produit.image1}) }}" class="text-danger close-cross" onclick="return confirm('Souhaitez-vous supprimer cette photo ?');"><i class="fa-solid fa-xmark"></i></a>
                                             {% endif %}
                                         </div>
                                     {% endif %}
-                                    {{ form_row(form.image1) }}
+                                    {% if (edition is defined) and (edition == true) %}
+                                        {{ form_row(form.image1, {'required': false}) }}
+                                    {% else %}
+                                        {{ form_row(form.image1) }} 
+                                    {% endif %}
                                 </div>
                                 <div class="d-flex mb-3">
                                     {% if produit is defined %}
-                                        <div class="me-2" style="width:100px; height: 100px; border:0.1px solid #ccc;">
+                                        <div class="me-2" style="position:relative; width:100px; height: 100px; border:0.1px solid #ccc;">
                                             {% if produit.image2 is not null %}
                                                 <img src="{{ asset('uploads/produits/' ~ produit.image2) }}" alt="">
+                                                <a href="{{ path('admin_delete_product_photo', {'id': produit.id, 'photoname': produit.image2}) }}" class="text-danger close-cross" onclick="return confirm('Souhaitez-vous supprimer cette photo ?');"><i class="fa-solid fa-xmark"></i></a>
                                             {% endif %}
                                         </div>
                                     {% endif %}
@@ -53,9 +64,10 @@
                                 </div>
                                 <div class="d-flex mb-3">
                                     {% if produit is defined %}
-                                        <div class="me-2" style="width:100px; height: 100px; border:0.1px solid #ccc;">
+                                        <div class="me-2" style="position:relative; width:100px; height: 100px; border:0.1px solid #ccc;">
                                             {% if produit.image3 is not null %}
                                                 <img src="{{ asset('uploads/produits/' ~ produit.image3) }}" alt="">
+                                                <a href="{{ path('admin_delete_product_photo', {'id': produit.id, 'photoname': produit.image3}) }}" class="text-danger close-cross" onclick="return confirm('Souhaitez-vous supprimer cette photo ?');"><i class="fa-solid fa-xmark"></i></a>
                                             {% endif %}
                                         </div>
                                     {% endif %}
