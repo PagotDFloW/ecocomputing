@@ -1,0 +1,13 @@
+
+p {
+    margin:0 !important;
+}
+
+p.name {
+    font-weight:bold;
+    font-size:20px;
+}
+
+p.small, span.small {
+    font-size:11px !important;
+}

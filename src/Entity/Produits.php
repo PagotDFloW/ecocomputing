@@ -89,6 +89,16 @@ class Produits
      */
     private $categorie;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Promotions::class, mappedBy="produit")
+     */
+    private $promotions;
+
+    public function __construct()
+    {
+        $this->promotions = new ArrayCollection();
+    }
+
    
 
     public function getId(): ?int
@@ -260,6 +270,36 @@ class Produits
     public function setCategorie(?Categories $categorie): self
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Promotions[]
+     */
+    public function getPromotions(): Collection
+    {
+        return $this->promotions;
+    }
+
+    public function addPromotion(Promotions $promotion): self
+    {
+        if (!$this->promotions->contains($promotion)) {
+            $this->promotions[] = $promotion;
+            $promotion->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removePromotion(Promotions $promotion): self
+    {
+        if ($this->promotions->removeElement($promotion)) {
+            // set the owning side to null (unless already changed)
+            if ($promotion->getProduit() === $this) {
+                $promotion->setProduit(null);
+            }
+        }
 
         return $this;
     }

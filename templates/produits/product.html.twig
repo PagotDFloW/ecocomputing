@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="mt-5 mb-5">
+            <h1>{{ product.name }}</h1>
+            <div class="mt-4 d-flex justify-content-between">
+                <div class="col-5">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="col-2 d-flex flex-column">
+                            {% if product.image1 is not null %}
+                                <div class="border col-12 mb-4">
+                                    <img src="{{ asset('uploads/produits/' ~ product.image1) }}" alt="">
+                                </div>
+                            {% elseif product.image2 is not null %}
+                                <div class="border col-12 mb-4">
+                                    <img src="{{ asset('uploads/produits/' ~ product.image2) }}" alt="">
+                                </div>
+                            {% elseif product.image3 is not null %}
+                                <div class="border col-12 mb-4">
+                                    <img src="{{ asset('uploads/produits/' ~ product.image3) }}" alt="">
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-9 border">
+                            {% if product.image1 is not null %}
+                                <img src="{{ asset('uploads/produits/' ~ product.image1) }}" alt="">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="d-flex flex-column">
+                        <p class="name">{{ product.name }}</p>
+                        <p>{{ product.description }}</p>
+                        {% if product.categorie is not null %}
+                            <p>Catégorie : {{ product.categorie.name }}</p>
+                        {% endif %}
+                        <p>Condition : {{ product.produitCondition }}</p>
+
+                        {% if product.promotions is not empty %}
+                            {% set now = date('now') %}
+                            {% set now = now|date('Y-m-d') %}
+                            {% for promo in product.promotions %}
+                                {% if (promo.endAt|date('Y-m-d') >= now) and (promo.startAt|date('Y-m-d') <= now) %}
+                                    {% set newPrice = promo.reduction * product.prix / 100 %}
+                                    {% set newPrice = product.prix - newPrice %}
+                                    <p class="text-success"><i class="fas fa-ad"></i>Promo : <span style="text-decoration-line: line-through; color:red;">{{ product.prix }}€</span> {{ newPrice }}€ <span class="small">(-{{ promo.reduction }}%)</span></p>
+                                    <p class="small">Fin de promo : {{ promo.endAt|format_datetime }}</p>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="d-flex align-items-center mt-5">
+                        <button class="btn btn-primary btn-sm"><i class="fas fa-shopping-cart"></i> ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
