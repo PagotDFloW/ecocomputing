@@ -39,10 +39,16 @@ class Categories
      */
     private $subCategories;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Promotions::class, mappedBy="category")
+     */
+    private $promotions;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
         $this->subCategories = new ArrayCollection();
+        $this->promotions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -128,6 +134,36 @@ class Categories
             // set the owning side to null (unless already changed)
             if ($subCategory->getCategoryParent() === $this) {
                 $subCategory->setCategoryParent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Promotions[]
+     */
+    public function getPromotions(): Collection
+    {
+        return $this->promotions;
+    }
+
+    public function addPromotion(Promotions $promotion): self
+    {
+        if (!$this->promotions->contains($promotion)) {
+            $this->promotions[] = $promotion;
+            $promotion->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removePromotion(Promotions $promotion): self
+    {
+        if ($this->promotions->removeElement($promotion)) {
+            // set the owning side to null (unless already changed)
+            if ($promotion->getCategory() === $this) {
+                $promotion->setCategory(null);
             }
         }
 

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        
+        <div class="col-10 m-auto mt-4 mb-5" style="margin-bottom:5rem;">
+            <h1>Nos promotions en cours !</h1>
+
+
+            <div class="mt-4 row row-cols-1 g-4 justify-content-center">
+                {% for promo in promotions|sort((a, b) => a.endAt<=>b.endAt) %}     
+                    <div class="col-3">
+                        <div class="card h-100">
+                            <div style="height:150px;">
+                                {% if (promo.produit is not null) and (promo.produit.image1 is not null) %}
+                                    <a href="{{ path('show_produit', {'id': promo.produit.id}) }}"><img src="{{ asset('uploads/produits/' ~ promo.produit.image1) }}" class="card-img-top" alt="..."></a>
+                                {% endif %}
+                            </div>
+
+                            <div class="card-body">
+                                <p>{{ promo.text }}</p>
+                                <p class="card-text">-{{ promo.reduction }}%</p>
+                            </div>
+
+                            <ul class="list-group list-group-flush">
+                                
+                                <li class="list-group-item ft-12" style="padding: 0.2rem 0.5rem;">
+                                    Catégorie : 
+                                    {% if promo.category is not null %}
+                                        {{ promo.category.name }}
+                                    {% endif %}
+                                </li>
+                                <li class="list-group-item ft-12" style="padding: 0.2rem 0.5rem; font-size: 10px;">Fin de promo : {{ promo.endAt|date("d/m/Y") }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
