@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+
+    <div class="container">
+        <div class="col-10 m-auto d-flex align-items-start justify-content-between flex-wrap mt-5">
+            {% for produit in produits %}
+                <div class="d-flex flex-column col-3 p-2 m-1 rounded-3 border">
+                    <img src="{{ asset('uploads/produits/' ~ produit.image1) }}" alt="">
+                    <p>{{ produit.name }}</p>
+                    {% include "produits/includes/buttons/addToCartBtn.html.twig" with {'produit': produit} %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
