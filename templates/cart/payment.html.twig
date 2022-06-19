@@ -1,0 +1,87 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <div class="container">
+        {{ form_start(form) }}
+            <div class="row d-flex justify-content-center align-items-start h-100 pt-5">
+                <div class="col-6">
+                    <div class="d-flex flex-column">
+                        <div class="mb-2"><h4>{{ commande.user.nom }} {{ commande.user.prenom }}</h4></div>
+
+                        <div>
+                            {{ form_row(form.adresse) }}
+                        </div>
+
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="col-8">
+                                    {{ form_row(form.ville) }}
+                                </div>
+                                
+                                <div class="col-3">
+                                    {{ form_row(form.codePostal) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            {{ form_row(form.livraison) }}
+                        </div>
+                        
+                        <div>
+                            <style>
+                                fieldset > div {
+                                    display: flex;
+                                }
+
+                                fieldset > div .form-check {
+                                    margin-right:15px;
+                                }
+                            </style>
+                            {{ form_row(form.paiement) }}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Payer</button>
+                    </div>
+                </div>
+
+                <div class="col-4" style="border-left:1px solid rgba(128, 128, 128, 0.279);">
+                    <h5 class="mb-3">Mon panier : </h5>
+                    {% for product in commande.produits %}
+                        {% set newPrice = null %}
+                        {% for promo in promotions %}
+                            {% if promo.product.id == product.produit.id %}
+                                {% set newPrice = promo.promotion.reduction * product.produit.prix / 100 %}
+                                {% set newPrice = product.produit.prix - newPrice %}
+                            {% endif %}
+                        {% endfor %}
+
+                        <div class="d-flex justify-content-between align-items-center border" style="height:50px; max-height:50px;">
+                            <div class="col-2">
+                                <img src="{{ asset('uploads/produits/' ~ product.produit.image1) }}" class="rounded-3" alt="{{ product.produit.name }}" style="max-height:48px;">
+                            </div>
+
+                            <div class="col-7">
+                                <p style="font-size:13px;">{{ product.produit.name }}</p>
+                            </div>
+
+                            <div class="col-2">
+                                {% if newPrice is not null %}
+                                    <p class="mb-0 text-center">{{ newPrice * product.quantity }}€</p>
+                                {% else %}
+                                    <p class="mb-0 text-center">{{ product.produit.prix * product.quantity }}€</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="mt-2 p-3 rounded-3" style="background-color: #4BA849;">
+                        <p class="text-end text-light">Total : {{ commande.total }}€</p>
+                    </div>
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
