@@ -13,15 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-/**
- * @Route("/admin", name="admin_")
- */
 class ProduitsController extends AbstractController
 {
     /**
-     * @Route("/produits", name="produits")
+     * @Route("/admin/produits", name="admin_produits")
      */
-    public function index(ProduitsRepository $repo): Response
+    public function adminListeProduits(ProduitsRepository $repo): Response
     {
         $produits = $repo->createQueryBuilder('p');
         $produits->select('p')
@@ -39,7 +36,7 @@ class ProduitsController extends AbstractController
 
 
     /**
-     * @Route("/produit/new", name="new_produit")
+     * @Route("/admin/produit/new", name="admin_new_produit")
      */
     public function createProduct(EntityManagerInterface $manager, Request $request) {
 
@@ -86,7 +83,7 @@ class ProduitsController extends AbstractController
     }
 
     /**
-     * @Route("/produit/{id}/edit", name="edit_produit")
+     * @Route("/admin/produit/{id}/edit", name="admin_edit_produit")
      */
     public function editProduct(Produits $produit, EntityManagerInterface $manager, Request $request) {
         $image1 = $produit->getImage1();
@@ -148,7 +145,7 @@ class ProduitsController extends AbstractController
 
 
     /**
-     * @Route("/produit/{id}/delete", name="delete_produit")
+     * @Route("/admin/produit/{id}/delete", name="admin_delete_produit")
      */
     public function deleteProduit(Produits $produit, EntityManagerInterface $manager, Request $request) {
         $image1 = $produit->getImage1();
@@ -182,7 +179,7 @@ class ProduitsController extends AbstractController
 
 
     /**
-     * @Route("/produit/{id}/{photoname}/delete-photo", name="delete_product_photo")
+     * @Route("/admin/produit/{id}/{photoname}/delete-photo", name="admin_delete_product_photo")
      */
     public function deleteProductPhoto(Produits $produit, string $photoname, EntityManagerInterface $manager, Request $request) {
 
@@ -209,5 +206,19 @@ class ProduitsController extends AbstractController
         $manager->flush();
 
         return $this->redirectToRoute('admin_edit_produit', ['id' => $produit->getId()]);
+    }
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    /**
+     * @Route("/produits", name="produits")
+     */
+    public function getProduits(ProduitsRepository $repo) {
+        return $this->render('produits/allProducts.html.twig', [
+            'produits' => $repo->findAll()
+        ]);
     }
 }

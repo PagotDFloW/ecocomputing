@@ -51,9 +51,11 @@
                     {% for product in commande.produits %}
                         {% set newPrice = null %}
                         {% for promo in promotions %}
-                            {% if promo.product.id == product.produit.id %}
-                                {% set newPrice = promo.promotion.reduction * product.produit.prix / 100 %}
-                                {% set newPrice = product.produit.prix - newPrice %}
+                            {% if promo.promotion is not null %}
+                                {% if promo.product.id == product.produit.id %}
+                                    {% set newPrice = promo.promotion.reduction * product.produit.prix / 100 %}
+                                    {% set newPrice = product.produit.prix - newPrice %}
+                                {% endif %}
                             {% endif %}
                         {% endfor %}
 
