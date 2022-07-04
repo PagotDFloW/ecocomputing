@@ -2,14 +2,15 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Commandes;
+use App\Form\CommandeType;
+use App\Entity\ProduitsCommande;
 use App\Service\Cart\CartService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\Commandes;
-use App\Entity\ProduitsCommande;
-use App\Form\CommandeType;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CartController extends AbstractController
 {
@@ -50,6 +51,7 @@ class CartController extends AbstractController
 
     /**
      * @Route("/panier/valider", name="cart_validate")
+     * @IsGranted("ROLE_USER")
      */
     public function validateCart(CartService $cartService, EntityManagerInterface $manager, Request $request) {
         $commande = new Commandes();
