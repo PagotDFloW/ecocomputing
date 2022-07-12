@@ -65,9 +65,15 @@ class Commandes
      */
     private $produits;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Prestations::class, mappedBy="commande")
+     */
+    private $prestations;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
+        $this->prestations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -195,6 +201,36 @@ class Commandes
             // set the owning side to null (unless already changed)
             if ($produit->getCommande() === $this) {
                 $produit->setCommande(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Prestations>
+     */
+    public function getPrestations(): Collection
+    {
+        return $this->prestations;
+    }
+
+    public function addPrestation(Prestations $prestation): self
+    {
+        if (!$this->prestations->contains($prestation)) {
+            $this->prestations[] = $prestation;
+            $prestation->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrestation(Prestations $prestation): self
+    {
+        if ($this->prestations->removeElement($prestation)) {
+            // set the owning side to null (unless already changed)
+            if ($prestation->getCommande() === $this) {
+                $prestation->setCommande(null);
             }
         }
 
