@@ -50,6 +50,11 @@ class Prestations
      */
     private $endAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Quotes::class, inversedBy="prestations")
+     */
+    private $quote;
+
     public function __construct()
     {
         $this->parts = new ArrayCollection();
@@ -140,6 +145,18 @@ class Prestations
     public function setEndAt(?\DateTimeInterface $endAt): self
     {
         $this->endAt = $endAt;
+
+        return $this;
+    }
+
+    public function getQuote(): ?Quotes
+    {
+        return $this->quote;
+    }
+
+    public function setQuote(?Quotes $quote): self
+    {
+        $this->quote = $quote;
 
         return $this;
     }

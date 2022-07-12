@@ -30,7 +30,8 @@ class CartController extends AbstractController
     /**
      * @Route("/panier/add/{id}", name="cart_add")
      */
-    public function addToCart($id, CartService $cartService) {
+    public function addToCart($id, CartService $cartService)
+    {
         $cartService->add($id);
 
         return $this->redirectToRoute('cart');
@@ -53,7 +54,8 @@ class CartController extends AbstractController
      * @Route("/panier/valider", name="cart_validate")
      * @IsGranted("ROLE_USER")
      */
-    public function validateCart(CartService $cartService, EntityManagerInterface $manager, Request $request) {
+    public function validateCart(CartService $cartService, EntityManagerInterface $manager, Request $request)
+    {
         $commande = new Commandes();
         $commande->setUser($this->getUser());
 
@@ -74,6 +76,7 @@ class CartController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $commande->setDatetime(new \DateTime);
+            return $this->redirectToRoute('app_quote_save', ['id' => $commande->getId()]);
             dd($form->getData());
         }
 
