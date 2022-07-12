@@ -48,10 +48,18 @@ class LoginFormUserAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
+        $user = $token->getUser();
+        if($user->isVerified() == false){
+            $token->setAuthenticated(false);
+            $request->getSession()->getFlashBag()->add('error', 'Your email address hasn\'t been verified.');
+            return new RedirectResponse($this->urlGenerator->generate('app_login'));
+        }
+        else{
+            // For example:
+            $request->getSession()->getFlashBag()->add('success', 'Connexion réussie. Bonjour '.$user->getPrenom().'!');
+            return new RedirectResponse($this->urlGenerator->generate('home'));
+        }
 
-        // For example:
-        return new RedirectResponse($this->urlGenerator->generate('home'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
     protected function getLoginUrl(Request $request): string
