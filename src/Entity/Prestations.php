@@ -50,6 +50,11 @@ class Prestations
      */
     private $endAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Commandes::class, inversedBy="prestations")
+     */
+    private $commande;
+
     public function __construct()
     {
         $this->parts = new ArrayCollection();
@@ -140,6 +145,18 @@ class Prestations
     public function setEndAt(?\DateTimeInterface $endAt): self
     {
         $this->endAt = $endAt;
+
+        return $this;
+    }
+
+    public function getCommande(): ?Commandes
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(?Commandes $commande): self
+    {
+        $this->commande = $commande;
 
         return $this;
     }
