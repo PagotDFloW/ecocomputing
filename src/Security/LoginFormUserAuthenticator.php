@@ -51,7 +51,7 @@ class LoginFormUserAuthenticator extends AbstractLoginFormAuthenticator
         $user = $token->getUser();
         if($user->isVerified() == false){
             $token->setAuthenticated(false);
-            $request->getSession()->getFlashBag()->add('error', 'Your email address hasn\'t been verified.');
+            $request->getSession()->getFlashBag()->add('error', 'Votre email n\'est pas validé veuillez vérifier votre boîte mail');
             return new RedirectResponse($this->urlGenerator->generate('app_login'));
         }
         else{

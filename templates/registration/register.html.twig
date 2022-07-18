@@ -22,16 +22,10 @@
                                 {{ form_widget(registrationForm.nom, {attr: {class: "form-control",id:'floatingInputUsername', placeholder: "Nom"}})}}
                                 <label for="floatingInputUsername"  class="form-label">Nom</label>
                             </div>
-                            <div class="invalid-feedback">
-                            {{ form_errors(registrationForm.nom) }}
-                            </div>
 
                             <div class="form-floating mb-3">
                                 {{ form_widget(registrationForm.prenom, {attr: {class: "form-control",id:'floatingInputFname', placeholder: "Nom"}})}}
                                 <label for="floatingInputFname"  class="form-label">Prénom</label>
-                            </div>
-                            <div class="invalid-feedback">
-                            {{ form_errors(registrationForm.prenom) }}
                             </div>
                             <hr>
 
@@ -39,15 +33,9 @@
                                 {{ form_widget(registrationForm.email, {attr: {class: "form-control", id:'floatingInputEmail', placeholder: "nom@exemple.com"}})}}
                                 <label for="floatingInputEmail"  class="form-label">Adresse email</label>
                             </div>
-                            <div class="invalid-feedback">
-                            {{ form_errors(registrationForm.email) }}
-                            </div>
                             <div class="form-floating mb-3">
                                 {{ form_widget(registrationForm.phone, {attr: {class: "form-control", id:'floatingInputPhone', placeholder: "nom@exemple.com"}})}}
                                 <label for="floatingInputPhone"  class="form-label">Numéro de téléphone</label>
-                            </div>
-                            <div class="invalid-feedback">
-                            {{ form_errors(registrationForm.phone) }}
                             </div>
 
                             <hr>
@@ -56,28 +44,18 @@
                                 {{ form_widget(registrationForm.plainPassword.first, {attr: {class: "form-control", id:'floatingPassword', placeholder: "Nom"}})}}
                                 <label for="floatingPassword"  class="form-label">Mot de passe</label>
                             </div>
-                            <div class="invalid-feedback">
-                            {{ form_errors(registrationForm.plainPassword.first) }}
-                            </div>
-
                             <div class="form-floating mb-3">
                                 {{ form_widget(registrationForm.plainPassword.second, {attr: {class: "form-control", id:'floatingPasswordConfirm', placeholder: "Nom"}})}}
                                 <label for="floatingPasswordConfirm"  class="form-label">Confirmer le mot de passe</label>
                             </div>
-                            <div class="invalid-feedback">
-                                {{ form_errors(registrationForm.plainPassword.second) }}
-                            </div>
-
-
                             <div class="d-grid mb-2">
-                                <button class="btn btn-lg btn-success btn-login fw-bold text-uppercase" type="submit">Register</button>
+                                <button class="btn btn-lg btn-success btn-login fw-bold text-uppercase" type="submit">S'inscrire</button>
                             </div>
 
                             <a class="d-block text-center mt-2 small" href="{{ path('app_login') }}">Déjà un compte ? Connectez vous ici</a>
 
                             <hr class="my-4">
 
-                        {{ form_start(registrationForm) }}
                     </div>
                     {{ form_end(registrationForm) }}
                 </div>
