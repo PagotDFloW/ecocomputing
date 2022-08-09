@@ -13,7 +13,7 @@
             <div class="container">
                 <div class="col-12 m-auto">
 
-                    {% for message in app.flashes('success') %}
+                    {% for message in app.flashes('success-admin-services') %}
                         <div class="alert alert-success alert-dismissible fase show" role="alert">
                             <strong>{{ message }}</strong>
                         </div>
@@ -22,30 +22,30 @@
                     <h1>Liste des catégories</h1>
 
                     <br>
-                    <button class="btn" style="background-color:#4BA849; font-size:12px; font-weight:bold;"><a href="{{ path('admin_new_category') }}" class="text-dark"><i class="fa-solid fa-plus"></i> nouvelle catégorie</a></button>
+                    <button class="btn" style="background-color:#4BA849; font-size:12px; font-weight:bold;"><a href="{{ path('admin_new_service') }}" class="text-dark"><i class="fa-solid fa-plus"></i> nouveau service</a></button>
                     <br>
 
-                    <div class="col-8 m-auto">
+                    <div class="col-10 m-auto">
                         <table class="table table-hover">
                             <thead>
                                 <tr class="active text-center">
                                     <th>#</th>
                                     <th>Nom</th>
-                                    <th>Sous catégories</th>
-                                    <th>Produits</th>
+                                    <th style="width:450px;">Description</th>
+                                    <th>Prix</th>
                                     <th></th>
                                 </tr>
                             </thead>
     
                             <tbody>
                                 {% set nbr = 0 %}
-                                {% for category in categories %}
+                                {% for service in services %}
                                     <tr style="text-align:center;">
                                         <td>{% set nbr = nbr + 1 %}{{ nbr }}</td>
-                                        <td><a href="{{ path('admin_edit_category', {'id': category.id}) }}" class="text-dark">{{ category.name }}</a></td>
-                                        <td>{{ category.subCategories|length }}</td>
-                                        <td>{{ category.produits|length }}</td>
-                                        <td><a href="{{ path('admin_delete_category', {'id': category.id}) }}" class="text-danger" onclick="return confirm('Souhaitez-vous supprimer cette catégorie ?');">supprimer</a></td>
+                                        <td><a href="{{ path('admin_edit_service', {'id': service.id}) }}" class="text-dark">{{ service.name }}</a></td>
+                                        <td style="width:450px; max-width:400px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ service.description }}</td>
+                                        <td>{{ service.price }}€</td>
+                                        <td><a href="{{ path('admin_delete_service', {'id': service.id}) }}" class="text-danger" onclick="return confirm('Souhaitez-vous supprimer ce service ?');">supprimer</a></td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

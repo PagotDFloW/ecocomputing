@@ -9,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Categories;
 
 class ProduitType extends AbstractType
 {
@@ -23,6 +25,12 @@ class ProduitType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'required' => true
+            ])
+            ->add('categorie', EntityType::class, [
+                'class' => Categories::class,
+                'choice_label' => 'name',
+                'label' => 'Catégorie',
+                'required' =>false
             ])
             ->add('image1', FileType::class, [
                 'mapped' => false,
