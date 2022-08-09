@@ -1,0 +1,73 @@
+{% extends 'back/baseBack.html.twig' %}
+
+
+{% block body %}
+
+{% include "headeronly.html.twig" only %}
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        {% include "back/includes/sidebar.html.twig" only %}
+
+        <div class="col py-3">
+            <div class="container">
+                <div class="col-12 m-auto">
+
+                    {% for message in app.flashes('success-admin-services') %}
+                        <div class="alert alert-success alert-dismissible fase show" role="alert">
+                            <strong>{{ message }}</strong>
+                        </div>
+                    {% endfor %}
+
+                    <div class="card mb-5">
+                        <div class="card-header" style="padding: 1.5rem 1rem !important;">
+                            <h2 class="card-title">Dashboard</h2>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-5">
+                        <div class="col-sm-3">
+                          <div class="card">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                              <h4 class="card-title"><a href="admin_produits" style="color:black;">Produits</a></h4>
+                              <a href="{{ path('admin_new_produit') }}" style="font-size:32px;"><i class="fa-solid fa-circle-plus"></i></a>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                          <div class="card">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                              <h4 class="card-title"><a href="{{ path('admin_promos') }}" style="color:black;">Promotions</a></h4>
+                              <a href="{{ path('admin_new_promo') }}" style="font-size:32px;"><i class="fa-solid fa-circle-plus"></i></a>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="card">
+                              <div class="card-body d-flex justify-content-between align-items-center">
+                                <h4 class="card-title"><a href="{{ path('admin_services') }}" style="color:black;">Services</a></h4>
+                                <a href="{{ path('admin_new_service') }}" style="font-size:32px;"><i class="fa-solid fa-circle-plus"></i></a>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="card">
+                              <div class="card-body d-flex justify-content-between align-items-center">
+                                <h4 class="card-title"><a href="{{ path('admin_categories') }}" style="color:black;">Catégories</a></h4>
+                                <a href="{{ path('admin_new_category') }}" style="font-size:32px;"><i class="fa-solid fa-circle-plus"></i></a>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
