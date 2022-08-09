@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+
+    <div class="container">
+        <div class="col-10 m-auto d-flex flex-column align-items-start justify-content-between flex-wrap mt-5">
+            {% for service in services %}
+                <div class="col-12 d-flex align-items-center p-3 mb-4 shadow-sm" style="border: 1px solid #ccc; border-radius:10px;">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <div class="d-flex flex-column">
+                            <p style="font-weight:bold;">{{ service.name }}</p>
+                            <small>{{ service.description }}</small>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <a href="{{ path('services_demande', {'id': service.id}) }}" style="text-align:center; font-size:11px;">Faire une demande</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

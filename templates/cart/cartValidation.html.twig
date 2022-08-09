@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-start h-100 pt-5">
+            <div class="col-6">
+                <div class="d-flex flex-column">
+                    <div class="alert alert-success alert-dismissible fase show" role="alert">
+                        <div class="mb-2"><h4>{{ commande.user.nom }} {{ commande.user.prenom }}</h4></div>
+                        <strong>Merci pour votre achat ! Votre commande a bien été enregistrée</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

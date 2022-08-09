@@ -3,20 +3,22 @@
 namespace App\Controller;
 
 use App\Entity\Produits;
-use App\Form\EditProduitType;
 use App\Form\ProduitType;
+use App\Form\EditProduitType;
 use App\Repository\ProduitsRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class ProductsController extends AbstractController
 {
     /**
      * @Route("/admin/produits", name="admin_produits")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function adminListeProduits(ProduitsRepository $repo): Response
     {
@@ -37,6 +39,7 @@ class ProductsController extends AbstractController
 
     /**
      * @Route("/admin/produit/new", name="admin_new_produit")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function createProduct(EntityManagerInterface $manager, Request $request) {
 
@@ -84,6 +87,7 @@ class ProductsController extends AbstractController
 
     /**
      * @Route("/admin/produit/{id}/edit", name="admin_edit_produit")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function editProduct(Produits $produit, EntityManagerInterface $manager, Request $request) {
         $image1 = $produit->getImage1();
@@ -146,6 +150,7 @@ class ProductsController extends AbstractController
 
     /**
      * @Route("/admin/produit/{id}/delete", name="admin_delete_produit")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function deleteProduit(Produits $produit, EntityManagerInterface $manager, Request $request) {
         $image1 = $produit->getImage1();
@@ -180,6 +185,7 @@ class ProductsController extends AbstractController
 
     /**
      * @Route("/admin/produit/{id}/{photoname}/delete-photo", name="admin_delete_product_photo")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function deleteProductPhoto(Produits $produit, string $photoname, EntityManagerInterface $manager, Request $request) {
 

@@ -38,11 +38,18 @@
                     </ul>
                 </div>
             </li>
-            
+
             <li>
-                <a href="#" class="nav-link px-0 align-middle">
-                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span>
-                </a>
+                <div class="dropdown nav-link px-0 align-middle">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="d-none d-sm-inline mx-1">Services</span>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                        <li><a class="dropdown-item" href="{{ path('admin_services') }}">Liste des services</a></li>
+                        <li><a class="dropdown-item" href="{{ path('admin_new_service') }}">Nouveau service</a></li>
+                    </ul>
+                </div>
             </li>
 
             <li>
@@ -56,6 +63,12 @@
                         <li><a class="dropdown-item" href="{{ path('admin_new_category') }}">Nouvelle catégorie</a></li>
                     </ul>
                 </div>
+            </li>
+
+            <li>
+                <a href="#" class="nav-link px-0 align-middle">
+                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span>
+                </a>
             </li>
 
             <li>

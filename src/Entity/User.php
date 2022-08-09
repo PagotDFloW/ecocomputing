@@ -64,6 +64,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $commandes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=DemandeService::class, mappedBy="client", orphanRemoval=true)
+     */
+    private $demandeServices;
+
     public function __toString() {
         return $this->nom;
     }
@@ -71,6 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
+        $this->demandeServices = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -234,6 +240,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($commande->getUser() === $this) {
                 $commande->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DemandeService>
+     */
+    public function getDemandeServices(): Collection
+    {
+        return $this->demandeServices;
+    }
+
+    public function addDemandeService(DemandeService $demandeService): self
+    {
+        if (!$this->demandeServices->contains($demandeService)) {
+            $this->demandeServices[] = $demandeService;
+            $demandeService->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemandeService(DemandeService $demandeService): self
+    {
+        if ($this->demandeServices->removeElement($demandeService)) {
+            // set the owning side to null (unless already changed)
+            if ($demandeService->getClient() === $this) {
+                $demandeService->setClient(null);
             }
         }
 

@@ -66,14 +66,15 @@ class Commandes
     private $produits;
 
     /**
-     * @ORM\OneToMany(targetEntity=Prestations::class, mappedBy="commande")
+     * @ORM\OneToMany(targetEntity=DemandeService::class, mappedBy="commande")
      */
-    private $prestations;
+    private $services;
+
 
     public function __construct()
     {
         $this->produits = new ArrayCollection();
-        $this->prestations = new ArrayCollection();
+        $this->services = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -208,32 +209,33 @@ class Commandes
     }
 
     /**
-     * @return Collection<int, Prestations>
+     * @return Collection<int, DemandeService>
      */
-    public function getPrestations(): Collection
+    public function getServices(): Collection
     {
-        return $this->prestations;
+        return $this->services;
     }
 
-    public function addPrestation(Prestations $prestation): self
+    public function addService(DemandeService $service): self
     {
-        if (!$this->prestations->contains($prestation)) {
-            $this->prestations[] = $prestation;
-            $prestation->setCommande($this);
+        if (!$this->services->contains($service)) {
+            $this->services[] = $service;
+            $service->setCommande($this);
         }
 
         return $this;
     }
 
-    public function removePrestation(Prestations $prestation): self
+    public function removeService(DemandeService $service): self
     {
-        if ($this->prestations->removeElement($prestation)) {
+        if ($this->services->removeElement($service)) {
             // set the owning side to null (unless already changed)
-            if ($prestation->getCommande() === $this) {
-                $prestation->setCommande(null);
+            if ($service->getCommande() === $this) {
+                $service->setCommande(null);
             }
         }
 
         return $this;
     }
+
 }
