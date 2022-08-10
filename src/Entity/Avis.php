@@ -32,9 +32,9 @@ class Avis
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): string
     {
-        return $this->date;
+        return $this->date->format('d/m/Y');
     }
 
     public function setDate(\DateTimeInterface $date): self
