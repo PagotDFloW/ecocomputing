@@ -8,7 +8,7 @@
 
     <div class="d-flex flex-column text-center mb-5">
         <div class="d-flex justify-content-center align-items-center p-2" style="border-bottom:1px solid white;">
-            <a href="#" style="color:white; font-size:13px;">Mes commandes</a>
+            <a href="{{ path('profile_commandes', {'id': app.user.id}) }}" style="color:white; font-size:13px;">Mes commandes</a>
         </div>
         <div class="d-flex justify-content-center align-items-center p-2" style="border-bottom:1px solid white;">
             <a href="#" style="color:white; font-size:13px;">Mes devis</a>
@@ -20,7 +20,7 @@
 
 
     <div class="d-flex flex-column text-center">
-        <a href="#" style="font-size:12px; color:white;">Modifier</a>
-        <a href="#" style="font-size:12px; color:white;">Supprimer</a>
+        <a href="{{ path('profile_edit', {'id': app.user.id}) }}" style="font-size:12px; color:white;">Modifier</a>
+        <a href="#" class="btn btn-danger" style="font-size:12px; color:white;">Supprimer</a>
     </div>
 </div>
