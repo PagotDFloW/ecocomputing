@@ -1,0 +1,12 @@
+.shop-list a{
+    color: #000;
+    text-decoration: none;
+}
+.reset-product-filter{
+    margin-left: 22%;
+}
+.reset-product-filter:hover{
+    background-color: #0c7f08;
+    color: white;
+    text-decoration: none;
+}

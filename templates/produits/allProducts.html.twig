@@ -1,18 +1,139 @@
 {% extends "base.html.twig" %}
 
+{% block stylesheets %}
+    <link href="{{ asset('styles/productList.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
 
 {% block body %}
+ <div class="container shop-list" style="margin-top: 2%">
+     <div class="row">
+         <!-- Content -->
+         <div class="col-md-9 order-md-2">
+             <div class="g-pl-15--lg">
+                 <!-- Filters -->
+                 <div class="d-flex justify-content-end align-items-center g-brd-bottom g-brd-gray-light-v4 g-pt-40 g-pb-20">
+                     <!-- Show -->
+                     <!-- End Show -->
 
-    <div class="container">
-        <div class="col-10 m-auto d-flex align-items-start justify-content-between flex-wrap mt-5">
-            {% for produit in produits %}
-                <div class="d-flex flex-column col-3 p-2 m-1 rounded-3 border">
-                    <img src="{{ asset('uploads/produits/' ~ produit.image1) }}" alt="">
-                    <p>{{ produit.name }}</p>
-                    {% include "produits/includes/buttons/addToCartBtn.html.twig" with {'produit': produit} %}
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+                     <!-- Sort By -->
+                     <div class="g-mr-60" style="margin-bottom: 1%">
+                         <h2 class="h6 align-middle d-inline-block g-font-weight-400 text-uppercase g-pos-rel g-top-1 mb-0">Trier par:</h2>
 
-{% endblock %}
+                         <!-- Secondary Button -->
+                         <select class="form-select sort-by d-inline" aria-label="Default select example" style="width: 65%">
+                             <option value="newest" selected>Nouveauté</option>
+                             <option value="min">Prix croissant</option>
+                             <option value="max">Prix décroissant</option>
+                         </select>
+                         <!-- End Secondary Button -->
+                     </div>
+                     <!-- End Sort By -->
+
+                     <!-- Sort By -->
+                     <ul class="list-inline mb-0">
+                         <li class="list-inline-item">
+                             <a class="u-icon-v2 u-icon-size--xs g-brd-gray-light-v3 g-brd-black--hover g-color-gray-dark-v5 g-color-black--hover" href="page-list-filter-left-sidebar-1.html">
+                                 <i class="icon-list"></i>
+                             </a>
+                         </li>
+                         <li class="list-inline-item">
+                             <a class="u-icon-v2 u-icon-size--xs g-brd-primary g-color-primary" href="page-grid-filter-left-sidebar-1.html">
+                                 <i class="icon-grid"></i>
+                             </a>
+                         </li>
+                     </ul>
+                     <!-- End Sort By -->
+                 </div>
+                 <!-- End Filters -->
+
+                 <!-- Products -->
+                 <div class="spinner-border" role="status" style="margin-left: 50%; margin-bottom: 50%; margin-top: 25%">
+                     <span class="sr-only">Loading...</span>
+                 </div>
+                 <div class="row g-pt-30 g-mb-50 product-list">
+
+                 </div>
+                 {{ knp_pagination_render(produits) }}
+                 <!-- End Products -->
+
+
+             </div>
+         </div>
+         <!-- End Content -->
+
+         <!-- Filters -->
+         <div class="col-md-3 order-md-1 g-brd-right--lg g-brd-gray-light-v4 g-pt-40">
+             <div class="g-pr-15--lg g-pt-60">
+                 <!-- Categories -->
+                 <div class="g-mb-30">
+                     <h3 class="h5 mb-3">Categories</h3>
+
+                     <ul class="list-unstyled">
+                         {% for categorie, numOfProduct in categories%}
+                             <li class="my-3">
+                                 <label class="form-check-inline u-check d-block u-link-v5 g-color-gray-dark-v4 g-color-primary--hover g-pl-30">
+                                     <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0 categorie-checkbox" type="checkbox" value="{{ categorie }}"/>
+                                     {{ categorie }} <span class="float-right g-font-size-13">{{ numOfProduct }}</span>
+                                 </label>
+                             </li>
+                         {% endfor %}
+                     </ul>
+                 </div>
+                 <!-- End Categories -->
+
+                 <hr>
+
+                 <!-- Pricing -->
+                 <div class="g-mb-30">
+                     <h3 class="h5 mb-3">Prix</h3>
+                     <div class="input-group mb-3">
+                         <span class="input-group-text">De</span>
+                         <input type="text" class="form-control minPrice" placeholder="Prix min" aria-label="minPrice">
+                         <span class="input-group-text">à</span>
+                         <input type="text" class="form-control maxPrice" placeholder="Prix max" aria-label="maxPrice">
+                     </div>
+
+                 </div>
+                 <!-- End Pricing -->
+
+                 <hr>
+                 <!-- Brand -->
+                 <div class="g-mb-30">
+                     <h3 class="h5 mb-3">Etat</h3>
+
+                     <ul class="list-unstyled">
+                         <li class="my-2">
+                             <label class="form-check-inline u-check d-block u-link-v5 g-color-gray-dark-v4 g-color-primary--hover g-pl-30">
+                                 <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0 product-state" value="neuf" type="checkbox"/>
+                                 Neuf
+                             </label>
+                             <label class="form-check-inline u-check d-block u-link-v5 g-color-gray-dark-v4 g-color-primary--hover g-pl-30">
+                                 <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0 product-state" value="utilisé" type="checkbox"/>
+                                 Utilisé
+                             </label>
+                             <label class="form-check-inline u-check d-block u-link-v5 g-color-gray-dark-v4 g-color-primary--hover g-pl-30">
+                                 <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0 product-state" value="vieux" type="checkbox"/>
+                                 Vieux
+                             </label>
+                             <label class="form-check-inline u-check d-block u-link-v5 g-color-gray-dark-v4 g-color-primary--hover g-pl-30">
+                                 <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0 product-state" value="vinted" type="checkbox"/>
+                                 Vinted
+                             </label>
+                         </li>
+                     </ul>
+                 </div>
+
+
+                 <hr>
+
+                 <button class="btn btn-block u-btn-black g-font-size-12 text-uppercase g-py-12 g-px-25 text-center reset-product-filter" type="button">Reinitialiser</button>
+             </div>
+         </div>
+         <!-- End Filters -->
+     </div>
+ </div>
+    <!-- End Products -->
+    {% endblock %}
+    {% block javascripts %}
+        <script src="{{ asset('js/product/productList.js') }}"></script>
+    {% endblock %}

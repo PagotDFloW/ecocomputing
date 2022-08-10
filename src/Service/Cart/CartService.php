@@ -37,6 +37,7 @@ class CartService
         }
 
         $this->session->set('panier', $panier);
+        return true;
     }
 
     public function addService($id) {
