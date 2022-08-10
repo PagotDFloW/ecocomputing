@@ -58,4 +58,12 @@ class AvisController extends AbstractController
             'form' => $form->createView()
         ]); 
     }
+
+    /**
+     * @Route("/avis/remove/{id}", name="rmAvis")
+     */
+    public function remove($id)
+    {
+        $avis = $this->getDoctrine()->getRepository(Avis::class)->find($id); 
+    }
 }
