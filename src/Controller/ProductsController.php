@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class ProductsController extends AbstractController
@@ -301,7 +300,7 @@ class ProductsController extends AbstractController
      * @Route("/produits/cart/add/{id}", name="products_add_to_cart")
      */
     public function addToCart(CartService $cartService, Request $request) {
-        if($cartService->add($request->get('id'))) {
+        if($cartService->addProduct($request->get('id'))) {
             return new JsonResponse(['type' => "success", 'message' => 'Produit ajouté au panier']);
         } else {
             return new JsonResponse(['type' => "error", 'message' => 'Produit non ajouté au panier']);
