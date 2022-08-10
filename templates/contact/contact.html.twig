@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+    <link href="{{ asset('styles/contact.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% block title %}
+    Envoyer nous un message
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-xl-6 mx-auto">
+                <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+                    <div class="card-body p-4 p-sm-5">
+                        <h3 class="card-title text-center mb-10">Une question?</h3>
+                        <p>Nous serions ravis de vous répondre!</p>
+                        <br>
+                            {{ form_start(form) }}
+
+                            {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
