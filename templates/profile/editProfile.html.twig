@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+
+    <style>
+        .content {
+            margin-bottom:0 !important;
+        }
+    </style>
+
+    <div class="d-flex">
+        {% include "profile/includes/profileSidebar.html.twig" with {'user': app.user} %}
+
+        <div class="d-flex flex-column col-11 mb-5">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success alert-dismissible fase show" role="alert">
+                    <strong>{{ message }}</strong>
+                </div>
+            {% endfor %}
+
+            <div class="col-10 m-auto" style="margin-top:2rem !important;">
+                <div class="card mb-5">
+                    <div class="card-header" style="padding: 1rem 1rem !important;">
+                        <h2 class="card-title">Editer mon profil</h2>
+                    </div>
+                </div>
+
+                <div class="col-9 m-auto">
+                    {{ form_start(form) }}
+                        {{ form_row(form.nom) }}
+                        {{ form_row(form.prenom) }}
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.phone) }}
+
+                        <button type="submit" class="btn btn-success">Enregistrer les mofidifications</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

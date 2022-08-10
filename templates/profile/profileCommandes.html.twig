@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+
+    <style>
+        .content {
+            margin-bottom:0 !important;
+        }
+    </style>
+
+    <div class="d-flex">
+        {% include "profile/includes/profileSidebar.html.twig" with {'user': app.user} %}
+
+        <div class="d-flex flex-column col-11">
+            <div class="col-10 m-auto" style="margin-top:2rem !important;">
+                <div class="card mb-5">
+                    <div class="card-header" style="padding: 1.5rem 1rem !important;">
+                        <h2 class="card-title">Mes Commandes</h2>
+                    </div>
+                </div>
+
+                <table class="table table-hover text-center">
+                    <thead>
+                        <tr class="active">
+                            <td>#</td>
+                            <td>Produits</td>
+                            <td>Services</td>
+                            <td>Livraison</td>
+                            <td>Paiement</td>
+                            <td>Total</td>
+                            <td>Date</td>
+                            <td>Status</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% set nbr = 1 %}
+                        {% for commande in commandes %}
+                            <tr>
+                                <td>{{ nbr }}{% set nbr = nbr + 1 %}</td>
+                                <td>{{ commande.produits|length }}</td>
+                                <td>{{ commande.services|length }}</td>
+                                <td>{{ commande.livraison }}</td>
+                                <td>{{ commande.paiement }}</td>
+                                <td>{{ commande.total }}</td>
+                                <td>{{ commande.datetime|format_datetime('short') }}</td>
+                                <td>{{ commande.status }}</td>
+                                <td><a href="{{ path('profile_commande_detail', {'user': app.user.id, 'commande': commande.id}) }}">consulter</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

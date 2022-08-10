@@ -1,0 +1,99 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+
+    <style>
+        .content {
+            margin-bottom:0 !important;
+        }
+    </style>
+
+    <div class="d-flex justify-content-between">
+        {% include "profile/includes/profileSidebar.html.twig" %}
+        
+        <div class="container">
+            <div class="mt-5 mb-5">
+                <div class="bg-light p-3">
+                    {% set nbrItems = commande.produits|length %}
+                    {% set nbrItems = nbrItems + commande.services|length %}
+
+                    <h1>Commande {{ commande.id }} - {{ commande.datetime|date('d/M/Y') }} <span style="font-size:16px;">({{ nbrItems }} produits)</span></h1>
+                </div>
+
+                <section class="h-100" style="background-color: #eee;">
+                    <div class="container h-100 py-5">
+                        <div class="row d-flex justify-content-center align-items-start h-100">
+                            <div class="col-7">
+                                {% set products = commande.produits %}
+                                {% set services = commande.services %}
+                                
+
+                                {% for item in products %}
+                                    <div class="card rounded-3 mb-4">
+                                        <div class="card-body p-4">
+                                            <div class="row d-flex justify-content-between align-items-center">
+
+                                                <div class="col-md-2 col-lg-2 col-xl-2">
+                                                    <img src="{{ asset('uploads/produits/' ~ item.produit.image1) }}" class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                                </div>
+
+                                                <div class="col-md-5 col-lg-5 col-xl-5">
+                                                    <p class="lead fw-normal mb-2">{{ item.produit.name }}</p>
+                                                    <p><span class="text-muted">{{ item.produit.prix }}€</p>
+                                                </div>
+
+                                                <div class="col-md-1 col-lg-1 col-xl-1 d-flex m-auto justify-content-center">
+                                                    <p>{{ item.quantity }}</p>
+                                                </div>
+
+                                                <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                                    <h5 class="mb-0">{{ item.produit.prix * item.quantity }}€</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                                {% for item in services %}
+                                    <div class="card rounded-3 mb-4">
+                                        <div class="card-body p-4">
+                                            <div class="row d-flex justify-content-between align-items-center">
+
+                                                <div class="col-md-8 col-lg-8 col-xl-8">
+                                                    <p class="lead fw-normal mb-2">{{ item.service.name }}</p>
+                                                    <p><span class="text-muted">{{ item.service.price }}€</p>
+                                                </div>
+
+                                                <div class="col-md-4 col-lg-2 col-xl-2 offset-lg-1">
+                                                    <h5 class="mb-0">{{ item.service.price }}€</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            
+                                <div class="card rounded-3 mb-4 p-3" style="background-color: #4BA849;"><p style="text-align:right; font-weight:bold; color:white;">Total : {{ commande.total }}€</p></div>
+                            </div>
+
+                            <div class="col-3">
+                                <div class="card rounded-3">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-column justify-content-center mb-4">
+                                            <p class="mb-4 text-center" style="font-weight:bold;">Livraison {{ commande.datetime|date('d/M/Y') }}</p>
+                                            <p class="mb-2"><span style="font-weight:bold;">Type :</span> {{ commande.livraison }}</p>
+                                            <p class="mb-2"><span style="font-weight:bold;">Adresse :</span> {{ commande.adresse }} {{ commande.ville }} {{ commande.codePostal }}</p>
+                                            <p class="mb-2"><span style="font-weight:bold;">Paiement :</span> {{ commande.paiement }}</p>
+                                            <p class="mb-2"><span style="font-weight:bold;">Status :</span> {{ commande.status }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

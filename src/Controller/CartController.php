@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class CartController extends AbstractController
 {
@@ -76,7 +77,7 @@ class CartController extends AbstractController
      * @Route("/panier/valider", name="cart_validate")
      * @IsGranted("ROLE_USER")
      */
-    public function validateCart(CartService $cartService, EmailVerifier $emailVerifier, EntityManagerInterface $manager, Request $request) {
+    public function validateCart(CartService $cartService, Session $session, EmailVerifier $emailVerifier, EntityManagerInterface $manager, Request $request) {
         $commande = new Commandes();
         $commande->setUser($this->getUser());
 
@@ -105,11 +106,16 @@ class CartController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $commande->setDatetime(new \DateTime);
-
+            $commande->setStatus("payée");
 
 
             $manager->persist($commande);
             $manager->flush();
+
+            // supprimer le panier de la session
+            $session->remove('panierServices');
+            $session->remove('panier');
+
 
             // envoie de confirmation du panier
             $emailVerifier->sendEmailConfirmation('app_verify_email', $this->getUser(),
@@ -117,7 +123,7 @@ class CartController extends AbstractController
                     ->from(new Address('service@ecocomputing.com', 'Team ECO COMPUTING'))
                     ->to($this->getUser()->getEmail())
                     ->subject('Votre commande a bien été enregistrée')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->htmlTemplate('cart/cart_confirmation_email.html.twig')
             );
 
             // envoyer d'un second mail avec le devis si un service se trouve dans le panier
