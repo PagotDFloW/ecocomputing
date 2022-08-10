@@ -1,26 +1,27 @@
-<div class="d-flex flex-column p-1 col-1" style="background-color: #4BA849;">
-    <div class="d-flex flex-column justify-content-center align-items-center mb-5">
-        <div style="width:90%; height:105px; border:5px solid black; border-radius:50%; margin-bottom:10px;"></div>
-        <p style="text-align:center;font-size:14px; font-weight:bold;">{{ user.nom|upper }} {{ user.prenom }}</p>
-        <p style="text-align:center;font-size:12px;">{{ user.email }}</p>
-    </div>
+<div class="d-flex flex-column p-1 col pt-5" style="background-color: white; border-top: solid;">
+	<div class="d-flex flex-column justify-content-center align-items-center mb-5">
+		<div style="width:100px; height:100px; border:5px solid black;  margin-bottom:10px;"></div>
+		<p style="text-align:center;font-size:14px; font-weight:bold;">{{ user.nom|upper }}
+			{{ user.prenom }}</p>
+		<p style="text-align:center;font-size:12px;">{{ user.email }}</p>
+	</div>
 
 
-    <div class="d-flex flex-column text-center mb-5">
-        <div class="d-flex justify-content-center align-items-center p-2" style="border-bottom:1px solid white;">
-            <a href="#" style="color:white; font-size:13px;">Mes commandes</a>
-        </div>
-        <div class="d-flex justify-content-center align-items-center p-2" style="border-bottom:1px solid white;">
-            <a href="#" style="color:white; font-size:13px;">Mes devis</a>
-        </div>
-        <div class="d-flex justify-content-center align-items-center p-2" style="border-bottom:1px solid white;">
-            <a href="#" style="color:white; font-size:13px;">Mes ventes</a>
-        </div>
-    </div>
+	<div class="d-flex flex-column text-center mb-5">
+		<div class="d-flex justify-content-center align-items-center p-2" style="border-top:1px solid black; border-bottom:1px solid black;" onmouseover="this.style.backgroundColor='#4BA849'" onmouseout="this.style.backgroundColor='white'">
+			<a href="/panier" style="color:black; font-size:13px;">Mes commandes</a>
+		</div>
+		<div class="d-flex justify-content-center align-items-center p-2" style="border-bottom:1px solid black;" onmouseover="this.style.backgroundColor='#4BA849'" onmouseout="this.style.backgroundColor='white'">
+			<a href="/devis" style="color:black; font-size:13px;">Mes devis</a>
+		</div>
+		<div class="d-flex justify-content-center align-items-center p-2" style="border-bottom:1px solid black;" onmouseover="this.style.backgroundColor='#4BA849'" onmouseout="this.style.backgroundColor='white'">
+			<a href="/ventes" style="color:black; font-size:13px;">Mes ventes</a>
+		</div>
+	</div>
 
 
-    <div class="d-flex flex-column text-center">
-        <a href="#" style="font-size:12px; color:white;">Modifier</a>
-        <a href="#" style="font-size:12px; color:white;">Supprimer</a>
-    </div>
+	<div class="d-flex flex-column text-center">
+		<a href="#" style="font-size:12px; color:white;">Modifier</a>
+		<a href="#" style="font-size:12px; color:white;">Supprimer</a>
+	</div>
 </div>
