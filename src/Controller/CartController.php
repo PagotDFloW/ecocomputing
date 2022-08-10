@@ -9,6 +9,7 @@ use App\Entity\ProduitsCommande;
 use App\Service\Cart\CartService;
 use Symfony\Component\Mime\Address;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,8 +35,9 @@ class CartController extends AbstractController
     /**
      * @Route("/panier/add/{id}", name="cart_add")
      */
-    public function addToCart($id, CartService $cartService) {
+    public function changeQuantity($id, CartService $cartService) {
         $cartService->addProduct($id);
+        $this->addFlash('success', 'Le produit a bien été ajouté au panier');
 
         return $this->redirectToRoute('cart');
     }
@@ -57,6 +59,7 @@ class CartController extends AbstractController
     public function removeFromCart($id, CartService $cartService)
     {
         $cartService->removeProduct($id);
+        $this->addFlash('success', 'Le produit a bien été supprimé du panier');
 
         return $this->redirectToRoute('cart');
     }

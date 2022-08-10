@@ -2,11 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\Categories;
 use App\Entity\Produits;
+use App\Entity\User;
 use App\Form\ProduitType;
 use App\Form\EditProduitType;
+use App\Repository\CategoriesRepository;
 use App\Repository\ProduitsRepository;
+use App\Service\Cart\CartService;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -214,6 +221,28 @@ class ProductsController extends AbstractController
         return $this->redirectToRoute('admin_edit_produit', ['id' => $produit->getId()]);
     }
 
+    /**
+     * @Route("/admin/produits/script", name="admin_script_produits")
+     */
+    public function scriptCreateProduct(EntityManagerInterface $manager, Request $request, CategoriesRepository $categoriesRepository) {
+        $i = 0;
+        while ($i < 10) {
+            $newProduit = new Produits();
+            $newProduit->setName('Produit '.$i);
+            $newProduit->setCategorie($categoriesRepository->find(rand(1, 6)));
+            $newProduit->setPrix(rand(10, 100));
+            $newProduit->setDescription('Produit '.$i.' de la catégorie 3');
+            $newProduit->setImage1('dcba2d9bf69e25372ab4a65ccd31f580.jpg');
+            $newProduit->setStatut('original');
+            $newProduit->setProduitCondition('utilisé');
+
+            $manager->persist($newProduit);
+            $manager->flush();
+            $i++;
+        }
+        exit('Done');
+    }
+
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -222,9 +251,60 @@ class ProductsController extends AbstractController
     /**
      * @Route("/produits", name="produits")
      */
-    public function getProduits(ProduitsRepository $repo) {
+    public function getProduits(ProduitsRepository $produitsRepository, CategoriesRepository $categoriesRepository,Request $request, PaginatorInterface $paginator, EntityManagerInterface $manager) {
+        $productPerCategory = [];
+        $categories = $categoriesRepository->findAll();
+        foreach ($categories as $category) {
+            $productPerCategory[$category->getName()] = count($produitsRepository->findBy(['categorie' => $category], ['id' => 'DESC'], 3));
+        }
+
+        $products = $produitsRepository->findAll();
+        $products = $paginator->paginate(
+            $products,
+            $request->query->getInt('page', 1),
+            12
+        );
+
+
         return $this->render('produits/allProducts.html.twig', [
-            'produits' => $repo->findAll()
+            'categories' => $productPerCategory,
+            'produits' => $products
         ]);
+    }
+
+    /**
+     * @Route("/produits/list", name="products_list")
+     */
+     public function getProductList(ProduitsRepository $produitsRepository, Request $request, PaginatorInterface $paginator) {
+         $page = ($request->get('page')) != ""? intval($request->get('page') ): 1;
+         $filter = $request->get('filter');
+         //get product sorted by price
+         if(isset($filter)){
+             $products = $produitsRepository->getProductsWithFilter($filter);
+         }
+         else{
+             $products = $produitsRepository->findAll();
+         }
+
+
+        $products = $paginator->paginate(
+            $products,
+            $page,
+            12
+        );
+        return $this->render('produits/list/productList.html.twig', [
+            'produits' => $products
+        ]);
+     }
+
+    /**
+     * @Route("/produits/cart/add/{id}", name="products_add_to_cart")
+     */
+    public function addToCart(CartService $cartService, Request $request) {
+        if($cartService->add($request->get('id'))) {
+            return new JsonResponse(['type' => "success", 'message' => 'Produit ajouté au panier']);
+        } else {
+            return new JsonResponse(['type' => "error", 'message' => 'Produit non ajouté au panier']);
+        }
     }
 }
