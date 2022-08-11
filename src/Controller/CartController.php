@@ -47,7 +47,8 @@ class CartController extends AbstractController
      * @Route("/panier/add-service/{id}", name="cart_add_service")
      * @IsGranted("ROLE_USER")
      */
-    public function addServiceToCart($id, CartService $cartService) {
+    public function addServiceToCart($id, CartService $cartService)
+    {
         $cartService->addService($id);
 
         return $this->redirectToRoute('cart');
@@ -116,6 +117,7 @@ class CartController extends AbstractController
             $manager->persist($commande);
             $manager->flush();
 
+            );
             // supprimer le panier de la session
             $session->remove('panierServices');
             $session->remove('panier');
@@ -141,7 +143,8 @@ class CartController extends AbstractController
             // envoyer d'un second mail avec le devis si un service se trouve dans le panier
 
 
-            return $this->render('cart/cartValidation.html.twig', ['commande' => $commande]);
+            // return $this->render('cart/cartValidation.html.twig', ['commande' => $commande]);
+            return $this->redirectToRoute('order_checkout', ["id" => $commande->getId()]);
         }
 
         return $this->render('cart/payment.html.twig', [

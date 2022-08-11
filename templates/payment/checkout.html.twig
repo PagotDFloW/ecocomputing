@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row d-flex justify-content-center align-items-start h-100 pt-5">
+			<div class="col-6">
+				<div class="d-flex flex-column">
+					<div class="mt-2 p-3 rounded-3" style="background-color: #4BA849;">
+						<p class="text-end text-light">Total :
+							{{ commande.total }}€</p>
+					</div>
+					<div class="col-xs-12 col-sm-6">
+						<form action="" method="POST">
+							<script type="text/javascript" src="/javascripts/jquery-3.1.1.min.js"></script>
+							<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-name="Paiement" data-key="pk_test_51LVYdyJqbezmWdjPyegBKhA2TiTM6ynKJUaAcPyc1rotCHcDaZEijJZwzACbuTjQLOmp78a7gAp92q8ESOVjQPcI001ByPTsid" data-zip-code="true" data-locale="auto" data-currency="eur" data-amount="{{ total }}"></script>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
