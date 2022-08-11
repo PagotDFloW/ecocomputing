@@ -11,69 +11,73 @@
                 </a>
             </li>
 
-            <li>
+            <li style="width: 185px;">
                 <div class="dropdown nav-link px-0 align-middle">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="d-none d-sm-inline mx-1">Produits</span>
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><a class="dropdown-item" href="{{ path('admin_produits') }}">Liste des produits</a></li>
-                        <li><a class="dropdown-item" href="{{ path('admin_new_produit') }}">Nouveau produit</a></li>
-                        <!-- <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li> -->
-                    </ul>
+                    <div class="accordion-item" style="background-color: #0c7f08; border: inherit">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" style="background-color: #0c7f08; border: none" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                Produits
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <a class="dropdown-item" href="{{ path('admin_produits') }}">Liste des produits</a>
+                            <a class="dropdown-item" href="{{ path('admin_new_produit') }}">Nouveau produit</a>
+                        </div>
+                    </div>
                 </div>
             </li>
 
-            <li>
-                <div class="dropdown nav-link px-0 align-middle">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="d-none d-sm-inline mx-1">Promotions</span>
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><a class="dropdown-item" href="{{ path('admin_promos') }}">Liste des promotions</a></li>
-                        <li><a class="dropdown-item" href="{{ path('admin_new_promo') }}">Nouvelle promotion</a></li>
-                    </ul>
+            <li style="width: 185px;">
+                <div class="accordion-item" style="background-color: #0c7f08; border: inherit">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" style="background-color: #0c7f08; border: none" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Promotions
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <a class="dropdown-item" href="{{ path('admin_promos') }}">Liste des promotions</a>
+                        <a class="dropdown-item" href="{{ path('admin_new_promo') }}">Nouvelle promotion</a>
+                    </div>
                 </div>
             </li>
 
-            <li>
-                <div class="dropdown nav-link px-0 align-middle">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="d-none d-sm-inline mx-1">Services</span>
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><a class="dropdown-item" href="{{ path('admin_services') }}">Liste des services</a></li>
-                        <li><a class="dropdown-item" href="{{ path('admin_new_service') }}">Nouveau service</a></li>
-                    </ul>
+            <li style="width: 185px;">
+                <div class="accordion-item" style="background-color: #0c7f08; border: inherit">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" style="background-color: #0c7f08; border: none" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Services
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <a class="dropdown-item" href="{{ path('admin_services') }}">Liste des services</a>
+                        <a class="dropdown-item" href="{{ path('admin_new_service') }}">Nouveau service</a>
+                    </div>
                 </div>
             </li>
 
-            <li>
-                <div class="dropdown nav-link px-0 align-middle">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="d-none d-sm-inline mx-1">Catégories</span>
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><a class="dropdown-item" href="{{ path('admin_categories') }}">Liste des catégories</a></li>
-                        <li><a class="dropdown-item" href="{{ path('admin_new_category') }}">Nouvelle catégorie</a></li>
-                    </ul>
+            <li style="width: 185px;">
+                <div class="accordion-item" style="background-color: #0c7f08; border: inherit">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" style="background-color: #0c7f08; border: none" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Categories
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <a class="dropdown-item" href="{{ path('admin_categories') }}">Liste des catégories</a>
+                        <a class="dropdown-item" href="{{ path('admin_new_category') }}">Nouvelle catégorie</a>
+                    </div>
                 </div>
             </li>
 
             <li>
                 <a href="#" class="nav-link px-0 align-middle">
-                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span>
+                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Commandes</span>
                 </a>
             </li>
 
             <li>
-                <a href="#" class="nav-link px-0 align-middle">
-                    <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span>
+                <a href="{{ path('admin_users') }}" class="nav-link px-0 align-middle">
+                    <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Liste des utilisateurs</span>
                 </a>
             </li>
         </ul>

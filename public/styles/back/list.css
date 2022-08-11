@@ -18,3 +18,13 @@
 .nav-link:focus {
     color:black;
 }
+.accordion-item{
+    background-color: #0c7f08;
+    border: inherit;
+}
+.accordion-button{
+    color: white;
+}
+.dropdown-item{
+    color: white;
+}
