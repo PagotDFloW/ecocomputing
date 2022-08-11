@@ -16,6 +16,7 @@
         "mobiledetect/mobiledetectlib": "^2.8",
         "phpdocumentor/reflection-docblock": "^5.3",
         "sensio/framework-extra-bundle": "^6.1",
+        "stripe/stripe-php": "^9.0",
         "suncat/mobile-detect-bundle": "dev-master",
         "symfony/asset": "5.3.*",
         "symfony/console": "5.3.*",
