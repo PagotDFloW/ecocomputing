@@ -3,9 +3,108 @@
 
 {% block body %}
 
-    <div class="container">
+    <div class="container mt-2 mb-2 p-3">
 
-        <div class="mt-5 mb-5">
+        <div class="col-12 border p-3 d-flex justify-content-between">
+            <div class="col-7 col-lg-5 g-mb-30">
+                <div class="col-12 d-flex flex-column justify-content-center">
+                    <img class="img-fluid border" src="{{ asset('uploads/produits/' ~ product.image1) }}" alt="Image Description" style="max-height:350px;">
+
+                    <div class="col-6 m-auto d-flex align-item-center justify-content-center mt-4">
+                        <div class="col-5 d-flex align-items-center border">
+                            <img class="img-fluid" src="{{ asset('uploads/produits/' ~ product.image1) }}" alt="Image Description">
+                        </div>
+
+                        {% if product.image2 is not null %}
+                            <div class="col-5 d-flex align-items-center">
+                                <img class="img-fluid" src="{{ asset('uploads/produits/' ~ product.image2) }}" alt="Image Description">
+                            </div>
+                        {% endif %}
+
+                        {% if product.image3 is not null %}
+                            <div class="col-5 d-flex align-items-center">
+                                <img class="img-fluid" src="{{ asset('uploads/produits/' ~ product.image3) }}" alt="Image Description">
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3 col-lg-4 g-mb-30 p-3">
+                <h4 class="text-center">{{ product.name }}</h4>
+                <hr class="g-mb-60">
+
+                {% set now = date('now') %}
+                {% set now = now|date('Y-m-d') %}
+                {% set newPrice = null %}
+                {% set promoEnd = null %}
+                {% set reduction = null %}
+
+                {% if product.promotions is not empty %}
+                    {% for promo in product.promotions %}
+                        {% if (promo.endAt|date('Y-m-d') >= now) and (promo.startAt|date('Y-m-d') <= now) %}
+                            {% set newPrice = promo.reduction * product.prix / 100 %}
+                            {% set newPrice = product.prix - newPrice %}
+                            {% set promoEnd = promo.endAt %}
+                            <p class="text-success"><i class="fas fa-ad"></i>Promo : <span style="text-decoration-line: line-through; color:red;">{{ product.prix }}€</span> {{ newPrice }}€ <span class="small">(-{{ promo.reduction }}%){% set promo = promo.reduction %}</span></p>
+                            <p class="small mb-4">Fin de promo : {{ promoEnd|format_datetime }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                {% if newPrice == null %}
+                    <p class="text-success mb-4" style="font-size:20px; font-weight:bold;">{{ product.prix }}€</p>
+                {% endif %}
+
+                <p>Retours GRATUITS</p> 
+                <p>Tous les prix incluent la TVA.</p>
+
+                <div class="d-flex flex-column mt-4">
+                    <p class="d-inline-block g-color-gray-dark-v5 g-font-size-13">Catégorie : {% if product.categorie is not null %}{{ product.categorie.name }}{% endif %}</p>
+                    <p class="d-inline-block g-color-gray-dark-v5 g-font-size-13 mb-4">Style: Emballage Standard</p>
+                    <p class="d-inline-block g-color-gray-dark-v5 g-font-size-13">{{ product.description }}</p>
+
+                </div>
+            </div>
+
+            <div class="col-2 col-lg-2 g-mb-30 border rounded p-3">
+                <div class="d-flex flex-column">
+                    {% if newPrice is not null %}
+                        <p class="text-success"><i class="fas fa-ad"></i>Promo : <span style="text-decoration-line: line-through; color:red;">{{ product.prix }}€</span> {{ newPrice }}€ <span class="small">(-{{ reduction }}%)</span></p>
+                        <p class="small mb-4">Fin de promo : {{ promoEnd|format_datetime }}</p>
+                    {% else %}
+                        <p class="text-success mb-4" style="font-size:20px; font-weight:bold;">{{ product.prix }}€</p>
+                    {% endif %}
+
+                    <p>Retours GRATUITS</p> 
+                    <p>Tous les prix incluent la TVA.</p>
+
+                    <div class="mt-4 mb-3">
+                        <p>Livraison GRATUITE <span style="font-weight:bold;">{{ date('now')|date_modify("+5 day")|format_date('full') }}</span></p>
+                    </div>
+
+                    <p class="text-uppercase text-success mb-4" style="font-weight:bold;">En stock.</p>
+
+                    <a href="#" onclick=addToCart({{ product.id }}) class="btn btn-warning" style="font-size:14px; font-weight:bold;">Ajouter au panier</a>
+                </div>
+            </div>
+        </div>
+
+        {% if categoryProducts is not null %}
+            <div class="col-10 m-auto mt-5">
+                <h5>Voir aussi :</h5>
+                <div class="col-10 mt-4 d-flex align-items-center justify-content-around">
+                    {% for singleProduct in categoryProducts %}
+                        <div class="col-3 border rounded d-flex flex-column">
+                            <img src="{{ asset('uploads/produits/' ~ singleProduct.image1) }}" alt="" style="max-height:120px;" class="rounded">
+                            <a href="" class="text-center">{{ singleProduct.name }} <span style="font-size:12px; font-weight:bold;">{{ singleProduct.prix }} €</span></a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        <!-- <div class="mt-5 mb-5">
             <h1>{{ product.name }}</h1>
             <div class="mt-4 d-flex justify-content-between">
                 <div class="col-5">
@@ -62,7 +161,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 {% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/cart/cart.js') }}"></script>
+{% endblock %}
+
