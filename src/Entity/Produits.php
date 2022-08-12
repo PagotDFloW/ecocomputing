@@ -94,9 +94,15 @@ class Produits
      */
     private $promotions;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Favoris::class, mappedBy="product", orphanRemoval=true)
+     */
+    private $favoris;
+
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
+        $this->favoris = new ArrayCollection();
     }
 
    public function __toString() {
@@ -300,6 +306,36 @@ class Produits
             // set the owning side to null (unless already changed)
             if ($promotion->getProduit() === $this) {
                 $promotion->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Favoris>
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(Favoris $favori): self
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris[] = $favori;
+            $favori->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Favoris $favori): self
+    {
+        if ($this->favoris->removeElement($favori)) {
+            // set the owning side to null (unless already changed)
+            if ($favori->getProduct() === $this) {
+                $favori->setProduct(null);
             }
         }
 

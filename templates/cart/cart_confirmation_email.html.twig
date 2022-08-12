@@ -463,6 +463,7 @@ a {text-decoration: none;}
                                                                     <h1
                                                                         style="Margin:0;line-height:34px;mso-line-height-rule:exactly;font-family:Oswald, sans-serif;font-size:28px;font-style:normal;font-weight:bold;color:#262626">
                                                                         DETAIL DE VOTRE COMMANDE</h1>
+                                                                    <p>{{ commande.total }}€</p>
                                                                 </td>
                                                             </tr>
                                                             <tr style="border-collapse:collapse">
@@ -483,10 +484,9 @@ a {text-decoration: none;}
                                                                 </td>
                                                             </tr>
                                                             <tr style="border-collapse:collapse">
-                                                                <td align="center" class="es-m-txt-c"
-                                                                    style="padding:0;Margin:0">
-                                                                    <!--[if mso]><a href="https://viewstripo.email/" target="_blank" hidden>
-<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="https://viewstripo.email/"
+                                                                <td align="center" class="es-m-txt-c" style="padding:0;Margin:0">
+                                                                    <!--[if mso]><a href="{{ path('profile_commande_detail', {'user': app.user.id, 'commande': commande.id}) }}" target="_blank" hidden>
+<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="{{ path('profile_commande_detail', {'user': app.user.id, 'commande': commande.id}) }}"
 style="height:64px; v-text-anchor:middle; width:182px" arcsize="0%" stroke="f" fillcolor="#1b2a2f">
 <w:anchorlock></w:anchorlock>
 <center style='color:#ffffff; font-family:Oswald, sans-serif; font-size:12px; font-weight:700; line-height:12px; mso-text-raise:1px'>VOIR MA COMMANDE</center>
@@ -494,9 +494,8 @@ style="height:64px; v-text-anchor:middle; width:182px" arcsize="0%" stroke="f" f
 <![endif]-->
                                                                     <!--[if !mso]><!-- --><span
                                                                         class="msohide es-button-border"
-                                                                        style="border-style:solid;border-color:#1B2A2F;background:#1B2A2F;border-width:0px;display:inline-block;border-radius:0px;width:auto;mso-hide:all"><a
-                                                                            href="{{ path('profile_commande_detail', {'user': app.user.id, 'commande': commande.id}) }}"
-                                                                            class="es-button" target="_blank"
+                                                                        style="border-style:solid;border-color:#1B2A2F;background:#1B2A2F;border-width:0px;display:inline-block;border-radius:0px;width:auto;mso-hide:all">
+                                                                        <a href="{{ path('profile_commande_detail', {'user': app.user.id, 'commande': commande.id}) }}" class="es-button"
                                                                             style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:12px;border-style:solid;border-color:#1B2A2F;border-width:25px 40px 25px 40px;display:inline-block;background:#1B2A2F;border-radius:0px;font-family:Oswald, sans-serif;font-weight:bold;font-style:normal;line-height:14px;width:auto;text-align:center">VOIR
                                                                             MA COMMANDE</a></span>
                                                                     <!--<![endif]-->
