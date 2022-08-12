@@ -14,7 +14,13 @@
                         <div class="card h-100">
                             <div style="height:150px;">
                                 {% if (promo.produit is not null) and (promo.produit.image1 is not null) %}
-                                    <a href="{{ path('show_produit', {'id': promo.produit.id}) }}"><img src="{{ asset('uploads/produits/' ~ promo.produit.image1) }}" class="card-img-top" alt="..."></a>
+                                <a href="{{ path('show_produit', {'id': promo.produit.id}) }}">
+                                    {% if 'http' in promo.produit.image1 %}
+                                        <img src={{ promo.produit.image1 }} class="card-img-top" alt="...">
+                                    {% else %}
+                                        <img class="img-fluid" src="{{ asset('uploads/produits/' ~ promo.produit.image1) }}" alt="Image Description"></a>
+                                    {% endif %}
+                                 </a>
                                 {% endif %}
                             </div>
 
