@@ -3,15 +3,30 @@
         <!-- <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <span class="fs-5 d-none d-sm-inline">Menu</span>
         </a> -->
+
     
-        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start fixed-top" id="menu">
+
+            <li>
+                <a href="{{ path('admin') }}" class="nav-link align-middle px-0" style="background-color: white; border-radius: inherit; max-width: 350px; border-right: #0c7f08 solid">
+                    <img src="{{ asset('images/ecocomputing_Logo.png') }}" style="width: 100%;">
+                </a>
+            </li>
             <li class="nav-item">
                 <a href="{{ path('admin') }}" class="nav-link align-middle px-0">
-                    <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                    <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Tableau de Bord</span>
                 </a>
             </li>
 
-            <li style="width: 185px;">
+            <hr style="border: #2f2f2f solid" width="16.5%">
+            <li class="nav-item">
+                <a href="{{ path('home') }}" class="nav-link align-middle px-0">
+                    <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Retourner sur Eco Computing</span>
+                </a>
+            </li>
+            <hr style="border: #2f2f2f solid" width="16.5%">
+
+            <li class="accordion-dropper">
                 <div class="dropdown nav-link px-0 align-middle">
                     <div class="accordion-item" style="background-color: #0c7f08; border: inherit">
                         <h2 class="accordion-header" id="flush-headingOne">
@@ -27,7 +42,7 @@
                 </div>
             </li>
 
-            <li style="width: 185px;">
+            <li class="accordion-dropper">
                 <div class="accordion-item" style="background-color: #0c7f08; border: inherit">
                     <h2 class="accordion-header" id="flush-headingOne">
                         <button class="accordion-button collapsed" style="background-color: #0c7f08; border: none" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -41,7 +56,7 @@
                 </div>
             </li>
 
-            <li style="width: 185px;">
+            <li class="accordion-dropper">
                 <div class="accordion-item" style="background-color: #0c7f08; border: inherit">
                     <h2 class="accordion-header" id="flush-headingOne">
                         <button class="accordion-button collapsed" style="background-color: #0c7f08; border: none" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -55,7 +70,7 @@
                 </div>
             </li>
 
-            <li style="width: 185px;">
+            <li class="accordion-dropper">
                 <div class="accordion-item" style="background-color: #0c7f08; border: inherit">
                     <h2 class="accordion-header" id="flush-headingOne">
                         <button class="accordion-button collapsed" style="background-color: #0c7f08; border: none" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -69,18 +84,19 @@
                 </div>
             </li>
 
-            <li>
+            <hr style="border: #2f2f2f solid" width="16.5%">
+
+            <li class="nav-item">
                 <a href="#" class="nav-link px-0 align-middle">
                     <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Commandes</span>
                 </a>
             </li>
 
-            <li>
+            <li class="nav-item">
                 <a href="{{ path('admin_users') }}" class="nav-link px-0 align-middle">
                     <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Liste des utilisateurs</span>
                 </a>
             </li>
         </ul>
-
     </div>
 </div>
