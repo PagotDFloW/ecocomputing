@@ -120,7 +120,7 @@ class ScriptController extends AbstractController
         $array= ['Installation Systeme d\'exploitation', 'Maintenance', 'Réparation Ventilation','Réparation Globale', 'Support', 'Autre'];
         for ($i = 0; $i < 10; $i++) {
             $service = new Services();
-            $service->setName($faker->name);
+            $service->setName($array[rand(0, 5)]);
             $service->setDescription($faker->text);
             $service->setPrice($faker->numberBetween(1, 100));
             $manager->persist($service);
