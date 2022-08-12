@@ -26,6 +26,6 @@
 
     <div class="d-flex flex-column text-center">
         <a href="{{ path('profile_edit', {'id': app.user.id}) }}" style="font-size:12px; color:white;">Modifier</a>
-        <a href="#" class="btn btn-danger" style="font-size:12px; color:white;">Supprimer</a>
+        <a href="{{ path('profile_delete', {'id': app.user.id}) }}" class="btn btn-danger" style="font-size:12px; color:white;" onclick="return confirm('Voulez-vous vraiment supprimer votre compte ? Ceci entraînera la suppression de toutes vos données sur ce site.')">Supprimer</a>
     </div>
 </div>
