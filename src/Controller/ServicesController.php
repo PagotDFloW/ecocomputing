@@ -3,17 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Services;
+use App\Form\ServiceType;
+use App\Entity\DemandeService;
+use App\Service\Cart\CartService;
+use App\Repository\ServicesRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\DemandeServiceRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Form\ServiceType;
-use App\Repository\ServicesRepository;
-use App\Entity\DemandeService;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use App\Service\Cart\CartService;
 
 class ServicesController extends AbstractController
 {
@@ -93,8 +94,13 @@ class ServicesController extends AbstractController
      * @Route("admin/services/{id}/delete", name="admin_delete_service")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function deleteService(Services $service, EntityManagerInterface $manager) {
+    public function deleteService(Services $service, DemandeServiceRepository $repo, EntityManagerInterface $manager) {
         $name = $service->getName();
+
+        foreach ($repo->findBy(['service' => $service->getId()]) as $demande) {
+            $deleteDemande = $manager->createQuery('DELETE FROM App\Entity\DemandeService ds WHERE ds.id = ' . $demande->getId());
+            $deleteDemande = $deleteDemande->getResult();
+        }
 
         $deleteService = $manager->createQuery('DELETE FROM App\Entity\Services s WHERE s.id = ' . $service->getId());
         $deleteService = $deleteService->getResult();

@@ -114,5 +114,24 @@ class ProfileController extends AbstractController
      */
     public function deleteAccount(User $user, EntityManagerInterface $manager, Request $request) {
 
+        foreach ($user->getCommandes() as $commande) {
+            foreach ($commande->getProduits() as $produit) {
+                $deleteProduit = $manager->createQuery('DELETE FROM App\Entity\ProduitsCommande c WHERE c.id = ' . $produit->getId());
+                $deleteProduit = $deleteProduit->getResult();
+            }
+            $deleteCommande = $manager->createQuery('DELETE FROM App\Entity\Commandes c WHERE c.id = ' . $commande->getId());
+            $deleteCommande = $deleteCommande->getResult();
+        }
+
+
+        foreach ($user->getFavoris() as $favoris) {
+            $deleteFavoris = $manager->createQuery('DELETE FROM App\Entity\Favoris c WHERE c.id = ' . $favoris->getId());
+            $deleteFavoris = $deleteFavoris->getResult();
+        }
+
+        $deleteUser = $manager->createQuery('DELETE FROM App\Entity\User u WHERE u.id = ' .$user->getId());
+        $deleteUser = $deleteUser->getResult();
+
+        return $this->redirectToRoute('home');
     }
 }
