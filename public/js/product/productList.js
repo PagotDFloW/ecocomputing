@@ -84,3 +84,19 @@ var productListAction = {
     }
 }
 
+function addToFavorites(id){
+    $.ajax({
+        url:        '/produits/favorites/add/'+id,
+        type:       'POST',
+        dataType:   'json',
+        async:      true,
+        data : {id: id},
+
+        success: function(data, status) {
+            notification(data.type, data.message);
+        },
+        error : function(xhr, textStatus, errorThrown) {
+            alert('Ajax request failed.');
+        }
+    });
+}

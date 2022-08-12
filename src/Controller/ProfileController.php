@@ -3,15 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Repository\CommandesRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use App\Form\UserType;
 use App\Entity\Commandes;
 use App\Service\Cart\CartService;
+use App\Repository\FavorisRepository;
+use App\Repository\CommandesRepository;
+use App\Repository\CategoriesRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("profile/", name="profile_")
@@ -50,6 +53,37 @@ class ProfileController extends AbstractController
             'commande' => $commande
         ]);
     }
+
+
+    // /**
+    //  * @Route("{id}/mes-favoris", name="favoris")
+    //  */
+    // public function getUserFavorites(FavorisRepository $repo, User $user) {
+    //     dd($user);
+    //     return $this->render('profile/profileFavorites.html.twig', [
+    //         'favoris' => $repo->find(['user' => $user->getId()], ['dateTime' => 'DESC'])
+    //     ]);
+    // }
+
+
+    /**
+     * @Route("{id}/favoris", name="favoris")
+     */
+    public function getFavoris(User $user, FavorisRepository $FavorisRepository) {
+
+
+        $favoris = $FavorisRepository->findBy(['user' => $this->getUser()->getId()], ['dateTime' => 'DESC']);
+
+
+        return $this->render('profile/includes/favoritesList.html.twig', [
+            'favoris' => $favoris
+        ]);
+    }
+
+
+
+
+
 
 
     /**
