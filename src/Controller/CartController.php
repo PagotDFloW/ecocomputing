@@ -117,7 +117,6 @@ class CartController extends AbstractController
             $manager->persist($commande);
             $manager->flush();
 
-            );
             // supprimer le panier de la session
             $session->remove('panierServices');
             $session->remove('panier');
