@@ -18,11 +18,11 @@ class ContactController extends AbstractController
     /**
      * @Route("contact", name="contact")
      */
-    public function index(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository,
-                          EntityManagerInterface $manager, MailerInterface $mailer): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, EntityManagerInterface $manager, MailerInterface $mailer): Response
     {
         $form = $this->createForm(ContactType::class);
         $form ->handleRequest($request);
+        
         if ($form->isSubmitted() && $form->isValid()) {
             //find user by role admin dql
             $userRepository = $manager->getRepository(User::class);

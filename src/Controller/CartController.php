@@ -9,13 +9,14 @@ use App\Entity\ProduitsCommande;
 use App\Service\Cart\CartService;
 use Symfony\Component\Mime\Address;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class CartController extends AbstractController
 {
@@ -80,7 +81,7 @@ class CartController extends AbstractController
      * @Route("/panier/valider", name="cart_validate")
      * @IsGranted("ROLE_USER")
      */
-    public function validateCart(CartService $cartService, Session $session, EmailVerifier $emailVerifier, EntityManagerInterface $manager, Request $request) {
+    public function validateCart(CartService $cartService, Session $session, MailerInterface $mailer, EntityManagerInterface $manager, Request $request) {
         $commande = new Commandes();
         $commande->setUser($this->getUser());
 
@@ -119,15 +120,23 @@ class CartController extends AbstractController
             $session->remove('panierServices');
             $session->remove('panier');
 
+            $email = (new TemplatedEmail())
+                ->from(new Address('service@ecocomputing.com', 'Team ECO COMPUTING'))
+                ->to($this->getUser()->getEmail())
+                ->subject('Confirmation de votre commande')
 
-            // envoie de confirmation du panier
-            $emailVerifier->sendEmailConfirmation('app_verify_email', $this->getUser(),
-                (new TemplatedEmail())
-                    ->from(new Address('service@ecocomputing.com', 'Team ECO COMPUTING'))
-                    ->to($this->getUser()->getEmail())
-                    ->subject('Votre commande a bien été enregistrée')
-                    ->htmlTemplate('cart/cart_confirmation_email.html.twig')
-            );
+                // path of the Twig template to render
+                ->htmlTemplate('cart/cart_confirmation_email.html.twig')
+
+                // pass variables (name => value) to the template
+                ->context([
+                    'commande' => $commande,
+                ])
+            ;
+
+            // dd($email->getContext()['commande']);
+            $mailer->send($email);
+
 
             // envoyer d'un second mail avec le devis si un service se trouve dans le panier
 
