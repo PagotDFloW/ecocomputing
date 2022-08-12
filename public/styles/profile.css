@@ -1,0 +1,29 @@
+.card-footer{
+    background-color :#4BA849;
+}
+.modifyBtn{
+    font-size:15px;
+    text-align: center;
+}
+.modifyBtn a{
+    color: white;
+}
+
+.cardList{
+    padding: 0.2rem 0.5rem;
+    color: #0a0a0a;
+    background-color: white;
+}
+.imgCard1{
+    display: block;
+    margin: 0px auto;
+    height:35%;
+    width: 55%;
+}
+
+.imgCard2{
+    display: block;
+    margin: 0px auto;
+    height:35%;
+    width: 65%;
+}

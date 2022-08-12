@@ -1,11 +1,74 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    <link href="{{ asset('styles/profile.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
 {% block title %}Hello ProfileController!{% endblock %}
 
 {% block body %}
 
-    <div class="d-flex align-items-start w-100">
-        {% include "profile/includes/profileSidebar.html.twig" with {'user': app.user} %}
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col py-3">
+                <div class="container pb-5">
+                    <div class="row row-cols-1 row-cols-md-5 g-4 justify-content-center">
+                            <div class="col">
+                                <div class="card h-100">
+                                    <div class="imgCard1">
+                                        <img src="{{ asset('images/user.jpg') }}" alt="profile">
+                                    </div>
+
+                                    <div class="card-body">
+                                        <h5 class="card-title">Mes informations</h5>
+                                    </div>
+
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item ft-12" class="cardList">{{ app.user.nom|upper }}</li>
+                                        <li class="list-group-item ft-12" class="cardList">{{ app.user.prenom }}</li>
+                                        <li class="list-group-item ft-12" class="cardList">{{ app.user.email }}</li>
+                                    </ul>
+
+                                    <div class="card-footer">
+                                        <div class="modifyBtn" >
+                                            <a href="{{ path('profile_edit', {'id': app.user.id}) }}">Modifier</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="imgCard2">
+                                    <img src="{{ asset('images/computer.jpg') }}" alt="profile">
+                                </div>
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Mes préstations</h5>
+                                </div>
+
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item ft-12">
+                                        <a href="{{ path('profile_commandes', {'id': app.user.id}) }}" class="cardList">Mes commandes</a>
+                                    </li>
+                                    <li class="list-group-item ft-12">
+                                        <a href="" class="cardList">Mes devis</a>
+                                    </li>
+                                    <li class="list-group-item ft-12">
+                                        <a href="{{ path('services') }}" class="cardList">Services</a>
+                                    </li>
+                                </ul>
+
+                                <div class="card-footer">
+                                    <div class="modifyBtn" >
+                                        <a href="{{ path('profile_commandes', {'id': app.user.id}) }}">Afficher</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 
 {% endblock %}
