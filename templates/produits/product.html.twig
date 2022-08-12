@@ -111,23 +111,39 @@
                     <div class="d-flex justify-content-between align-items-start">
                         <div class="col-2 d-flex flex-column">
                             {% if product.image1 is not null %}
+                                {% if 'http' in product.image1 %}
+                                    <img src={{ product.image1 }} class="card-img-top" alt="...">
+                                {% else %}
+                                    <img class="img-fluid" src="{{ asset('uploads/produits/' ~ product.image1) }}" alt="Image Description"></a>
+                                {% endif %}
                                 <div class="border col-12 mb-4">
-                                    <img src="{{ asset('uploads/produits/' ~ product.image1) }}" alt="">
                                 </div>
                             {% elseif product.image2 is not null %}
+                                {% if 'http' in product.image2 %}
+                                    <img src={{ product.image2 }} class="card-img-top" alt="...">
+                                {% else %}
+                                    <img class="img-fluid" src="{{ asset('uploads/produits/' ~ product.image2) }}" alt="Image Description"></a>
+                                {% endif %}
                                 <div class="border col-12 mb-4">
-                                    <img src="{{ asset('uploads/produits/' ~ product.image2) }}" alt="">
                                 </div>
                             {% elseif product.image3 is not null %}
+                                {% if 'http' in product.image3 %}
+                                    <img src={{ product.image3 }} class="card-img-top" alt="...">
+                                {% else %}
+                                    <img class="img-fluid" src="{{ asset('uploads/produits/' ~ product.image3) }}" alt="Image Description"></a>
+                                {% endif %}
                                 <div class="border col-12 mb-4">
-                                    <img src="{{ asset('uploads/produits/' ~ product.image3) }}" alt="">
                                 </div>
                             {% endif %}
                         </div>
 
                         <div class="col-9 border">
                             {% if product.image1 is not null %}
-                                <img src="{{ asset('uploads/produits/' ~ product.image1) }}" alt="">
+                                {% if 'http' in product.image1 %}
+                                    <img src={{ product.image1 }} class="card-img-top" alt="...">
+                                {% else %}
+                                    <img class="img-fluid" src="{{ asset('uploads/produits/' ~ product.image1) }}" alt="Image Description"></a>
+                                {% endif %}
                             {% endif %}
                         </div>
                     </div>
