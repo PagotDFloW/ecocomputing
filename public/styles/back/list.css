@@ -10,6 +10,7 @@
 .sidebarbackmenu  {
     background-color: #0c7f08;
     max-width: 350px;
+    width: 100%;
 }
 
 .nav-link {
