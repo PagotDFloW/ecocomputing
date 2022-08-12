@@ -26,15 +26,22 @@ class ProductsController extends AbstractController
      * @Route("/admin/produits", name="admin_produits")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function adminListeProduits(ProduitsRepository $repo): Response
+    public function adminListeProduits(ProduitsRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
         $produits = $repo->createQueryBuilder('p');
         $produits->select('p')
                  ->where('p.statut = :original')
                  ->orwhere('p.statut = :achete')
+                 ->orWhere('p.statut = :neuf')
                  ->orderBy('p.createdAt', 'DESC')
-                 ->setParameters(['original' => "original", 'achete' => "acheté"]);
+                 ->setParameters(['original' => "original", 'achete' => "acheté", 'neuf' => "neuf"]);
         $produits = $produits->getQuery()->getResult();
+        //paginate products
+        $produits = $paginator->paginate(
+            $produits,
+            $request->query->get('page', 1),
+            50
+        );
 
         return $this->render('produits/index.html.twig', [
             'controller_name' => 'ProduitsController',

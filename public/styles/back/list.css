@@ -9,6 +9,7 @@
 
 .sidebarbackmenu  {
     background-color: #0c7f08;
+    max-width: 350px;
 }
 
 .nav-link {
@@ -24,7 +25,19 @@
 }
 .accordion-button{
     color: white;
+    font-size: 20px;
+}
+.accordion-dropper{
+    width: 15%;
 }
 .dropdown-item{
     color: white;
+}
+.nav-item{
+    margin-left: 15px;
+    font-weight: bold;
+
+}
+.nav li{
+    font-size: 20px;
 }
