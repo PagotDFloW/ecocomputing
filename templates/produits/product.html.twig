@@ -8,22 +8,38 @@
         <div class="col-12 border p-3 d-flex justify-content-between">
             <div class="col-7 col-lg-5 g-mb-30">
                 <div class="col-12 d-flex flex-column justify-content-center">
-                    <img class="img-fluid border" src="{{ asset('uploads/produits/' ~ product.image1) }}" alt="Image Description" style="max-height:350px;">
+                    {% if 'http' in product.image1 %}
+                        <img class="img-fluid border" src={{ product.image1 }}>
+                    {% else %}
+                        <img class="img-fluid border" src="{{ asset('uploads/produits/' ~ product.image1) }}" alt="Image Description" style="max-height:350px;">
+                    {% endif %}
 
                     <div class="col-6 m-auto d-flex align-item-center justify-content-center mt-4">
                         <div class="col-5 d-flex align-items-center border">
-                            <img class="img-fluid" src="{{ asset('uploads/produits/' ~ product.image1) }}" alt="Image Description">
+                            {% if 'http' in product.image1 %}
+                                <img class="img-fluid border" src={{ product.image1 }}>
+                            {% else %}
+                                <img class="img-fluid border" src="{{ asset('uploads/produits/' ~ product.image1) }}" alt="Image Description" style="max-height:350px;">
+                            {% endif %}
                         </div>
 
                         {% if product.image2 is not null %}
                             <div class="col-5 d-flex align-items-center">
-                                <img class="img-fluid" src="{{ asset('uploads/produits/' ~ product.image2) }}" alt="Image Description">
+                                {% if 'http' in product.image2 %}
+                                    <img class="img-fluid border" src={{ product.image2 }}>
+                                {% else %}
+                                    <img class="img-fluid border" src="{{ asset('uploads/produits/' ~ product.image2) }}" alt="Image Description" style="max-height:350px;">
+                                {% endif %}
                             </div>
                         {% endif %}
 
                         {% if product.image3 is not null %}
                             <div class="col-5 d-flex align-items-center">
-                                <img class="img-fluid" src="{{ asset('uploads/produits/' ~ product.image3) }}" alt="Image Description">
+                                {% if 'http' in product.image3 %}
+                                    <img class="img-fluid border" src={{ product.image3 }}>
+                                {% else %}
+                                    <img class="img-fluid border" src="{{ asset('uploads/produits/' ~ product.image3) }}" alt="Image Description" style="max-height:350px;">
+                                {% endif %}
                             </div>
                         {% endif %}
                     </div>
@@ -96,7 +112,11 @@
                 <div class="col-10 mt-4 d-flex align-items-center justify-content-around">
                     {% for singleProduct in categoryProducts %}
                         <div class="col-3 border rounded d-flex flex-column">
-                            <img src="{{ asset('uploads/produits/' ~ singleProduct.image1) }}" alt="" style="max-height:120px;" class="rounded">
+                            {% if 'http' in product.image1 %}
+                                <img cstyle="max-height:120px;" class="rounded" src={{ product.image1 }}>
+                            {% else %}
+                                <img  style="max-height:120px;" class="rounded" src="{{ asset('uploads/produits/' ~ product.image1) }}">
+                            {% endif %}
                             <a href="" class="text-center">{{ singleProduct.name }} <span style="font-size:12px; font-weight:bold;">{{ singleProduct.prix }} €</span></a>
                         </div>
                     {% endfor %}
